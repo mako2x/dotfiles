@@ -1,0 +1,14 @@
+[user]
+	name = mako2x
+	email = arekara3nen@gmail.com
+[color]
+	ui = auto
+[alias]
+  cl = clone
+  ad = add .
+  co = checkout
+  cm = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	see = browse

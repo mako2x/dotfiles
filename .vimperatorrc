@@ -1,0 +1,337 @@
+"+----------------------------------------------------------------------------------------+
+" キーバインド
+"+----------------------------------------------------------------------------------------+
+" j/k でのスクロール幅を 1行 から 5行 に変更
+nnoremap j 5<C-e>
+nnoremap k 5<C-y>
+no <Down> 5<C-e>
+no <Up> 5<C-y>
+
+" ←→ で戻る・進む
+nnoremap <Left> <A-Left>
+nnoremap <Right> <A-Right>
+
+" Backspace でも戻る
+no <BS> <A-Left>
+
+" h/l でタブ移動
+nnoremap h gT
+nnoremap l gt
+
+" mでクイックヒント
+no m F
+
+" Fで拡張ヒント
+nnoremap F ;F
+
+" bで現在のタブを閉じる
+no b d
+
+" aではてなブックマーク検索
+no a :hb<Space>
+
+" oで現在のURLを開く
+no o T
+
+" pとPを逆に
+no p P
+no P p
+
+" sでGoogle Suggest検索
+no s :tabopen<Space>google<Space>
+
+" 閉じたタブ履歴から補完
+noremap U :undo<Space>
+
+" vで選択文字列をgoogle検索
+no v YP
+
+" Shift+yでタイトルをコピー
+no <S-y> :copy title<CR>
+
+" ghでホームページを新しいタブで開く
+no gh gH
+
+" gnで新しくタブを開く
+no gn :tabnew<CR>
+
+" Ctrl+h>でヘルプを表示
+no <C-h> :help<CR>
+
+" Shift + ← → で現在のタブの位置変更
+no <S-Right> :tabmove! +1<CR>
+no <S-Left>  :tabmove! -1<CR>
+
+" Shift + ↑でその他のタブを閉じる
+no <S-Up> :tabonly<CR>
+
+" Shift + ↓で現在のタブを複製する
+no <S-Down> :tabduplicate<CR>
+
+" Ctrl + ↑↓でツールバーを表示・非表示
+no <C-Down> :set toolbars=navigation,menu<CR>
+no <C-Up> :set toolbars=nonavigation,nomenu<CR>
+
+" ++/--でURL中の数字を一つ増やす/減らす
+no ++ <C-a>
+no -- <C-x>
+
+" 矢印キー & Ctrl+n・Ctrl+p でも補完を選択できるように
+cmap <Down> <TAB>
+cmap <Up> <S-TAB>
+cmap <C-n> <TAB>
+cmap <C-p> <S-TAB>
+
+" \aでリンクを貼られてないURLにリンクを貼る
+nnoremap <leader>a :anc<CR>
+
+" \pでプライベートブラウジングに移行/戻る
+nnoremap <leader>p :set invprivate<CR>
+
+" \dでサイト内検索
+noremap <leader>d y tsite:<C-v>
+
+" \wでtwitterを開く
+noremap <leader>w thttps://twitter.com/#!/mako2x/main<CR>
+
+" \fでFacebookを開く
+noremap <leader>f tfacebook.com<CR>
+
+" \gでGoogle Readerを開く
+noremap <leader>g thttp://www.google.co.jp/reader/view/?hl=ja&tab=wy<CR>
+
+" \cでGoogle Calendarを開く
+noremap <leader>c tgoogle.com/calendar<CR>
+
+" \cでSFC-SFSを開く
+noremap <leader>s thttps://vu8.sfc.keio.ac.jp/sfc-sfs/index.cgi?+en<CR>
+
+"+----------------------------------------------------------------------------------------+
+" 基本の設定
+"+----------------------------------------------------------------------------------------+
+" ブラウザのタイトル
+set titlestring="Firefox"
+
+" 検索での大文字小文字を無視
+set ic
+
+" 検索語のハイライト
+set hlsearch
+
+" 履歴を保存
+set history=1000
+
+" 以下のとき新しいタブで開く
+set activate=homepage,quickmark,tabopen,paste
+
+" 補完リストはサーチエンジンとロケーションバーの履歴の順番
+set complete=sl
+
+" リンクのURIをステータスラインに表示
+set showstatuslinks=1
+
+" ページロード時にテキストボックスにフォーカスするのを防ぐ
+set focuscontent
+
+" Cooperation LDRizeを初期状態ではoffにしておく
+let g:ldrc_enable = "false"
+
+" キャレットブラウズモードでキャレットの位置を見失わないように太めにする
+set! ui.caretWidth=8
+
+"キャッシュをHDDからRAMに
+set! browser.cache.disk.enable=false
+set! browser.cache.memory.enable=true
+" 単位(KB)
+set! browser.cache.memory.capacity=-1
+
+"最小化した時にメモリを開放 (Windowsのみ？)
+set! config.trim_on_minimize=true
+
+" 画像の多いタブを閉じた時にすぐにメモリ使用量を減らす
+set! image.mem.min_discard_timeout_ms=6000
+
+"ファイルダウンロード完了時のウイルススキャン機能オフ
+set! browser.download.manager.scanWhenDone=false
+
+"アドオンインストール時の待ち時間カット
+set! security.dialog_enable_delay=0
+
+" コマンドラインではIMEをOFFにする
+:style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive:}
+"JavaScriptでのウィンドウ移動・リサイズ拒否
+set! dom.disable_window_move_resize=true
+
+"JavaScriptのステータスバー操作を無効化
+set! dom.event.contextmenu.enabled=false
+
+" [[と]]でページをめくる。日本語ページ対応
+set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$,^次(へ|の|ペ),^続き,\bnext\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$,\bmore\b
+set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$,^前(へ|の|ペ),^戻る,\bprev|previous\b,^<$,^(<<|≪)$,^(<|≪),(<|≪)$
+
+set hintchars=hjklum
+
+" スマートキーワード
+js <<EOM
+[
+  ['google image search','http://www.google.com/images?&q=%s','gi'],
+  ['google reader search','http://www.google.com/reader/view/#search/%s/','gr'],
+  ['google blog search ','http://www.google.co.jp/#q=%s&tbm=blg','gb'],
+  ['google us search','http://www.google.com/webhp?hl=us#&hl=en&q=%s','gu'],
+  ['hatena bookmark','http://b.hatena.ne.jp/search/tag?q=%s&users=500','ha'],
+  ['twitter search','http://twitter.com/search?q=%s','tw'],
+  ['twitter user','http://twitter.com/%s','tu'],
+  ['twilog user','http://twilog.org/%s','tl'],
+  ['favstar user','http://ja.favstar.fm/users/%s/given','fav'],
+  ['github search','https://github.com/search?q=%s','gh'],
+  ['youtube search','http://www.youtube.com/results?search_query=%s','yt'],
+  ['nico video search','http://www.nicovideo.jp/search/%s','ni'],
+  ['cookpad','http://cookpad.com/レシピ/%s','co'],
+  ['2ch search','http://www.google.com/search?q=site:2ch.net+%s','2ch']
+].forEach(function (b) {
+  if (!bookmarks.isBookmarked(b[1])) {
+    bookmarks.add(false, b[0], b[1], b[2], ['vimp'], false);
+  }
+});
+EOM
+
+
+"" hatenabookmark
+" https://github.com/hatena/hatena-bookmark-xul/wiki/Vimperator-%E3%81%A7%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%8B%A1%E5%BC%B5%E3%82%92%E4%BD%BF%E3%81%86
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+
+"+----------------------------------------------------------------------------------------+
+" プラグイン設定
+"+----------------------------------------------------------------------------------------+
+" feedSomeKeys_3.js
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+command! -nargs=+ lazyfmapgooglereader  lazy fmap  -urls='http://www\.google\.(co\.jp|com)/reader' <args>
+command! -nargs=+ lazyfmapsgooglereader lazy fmaps -urls='http://www\.google\.(co\.jp|com)/reader' <args>
+command! -nargs=+ lazyfmapsgoogle lazy fmaps -urls='http://www\.google\.(co\.jp|com)/search\?' <args>
+"command! -nargs=+ lazyfmapstwitter lazy fmaps -urls='https://twitter\.com' <args>
+" Google Reader
+lazyfmapsgooglereader -events=vkeypress A r v O gh ga gs gt gu / ?
+lazyfmapsgooglereader -events=vkeypress i,j o,k f,s a,ga w,A
+lazyfmapsgooglereader -events=vkeypress <C-1>,1 <C-2>,2
+" Google
+lazyfmapsgoogle -events=vkeypress <Up> <Down>
+" Twitter
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+lazy fmaps -urls='^https://twitter\.com/' j k ? .
+lazy fmaps -urls='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu
+
+" GoogleReader + Tombloo
+lazyfmapgooglereader -events=vkeyup <C-t> T
+map -urls='http://www\.google\.co\.jp/reader/view' i <C-t>j
+
+
+" for はてブ 2010-02-14
+" javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+
+" ==VimperatorColorSchema==
+" name: Sweets enhanced by snaka. (Based on 'Sweets')
+" ==/VimperatorColorSchema==
+
+hi Hint font-family: monospace; font-size: 15px; font-weight: normal; color: lightyellow; background-color: rgba(30,30,30,.7); border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 5px 0px 5px; text-transform: uppercase; 
+
+hi HintElem background-color: pink; color: black;
+hi HintActive background-color: hotpink; color: white;
+
+"hi StatusLine     color:  CornflowerBlue; background: #000; font-weight: normal; font-size: 12pt;
+"hi StatusLineBroken   color:  black; background: #ffa0a0; font-weight: normal; font-size: 12pt;
+"hi StatusLineExtended color:  black; background: #a0ffa0; font-weight: normal; font-size: 12pt;
+"hi StatusLineSecure   color:  black; background: #a0a0ff; font-weight: normal; font-size: 12pt;
+
+hi Normal     color:  LightYellow;  background: #333; font-size: 12pt;
+hi CmdLine    color:  LightYellow;  background: #333; font-size: 14pt;
+hi InfoMsg    color:  LightYellow;  background: #333; font-size: 12pt;
+hi ModeMsg    color:  LightYellow;  background: #333; font-size: 12pt;
+hi MoreMsg    color:  LimeGreen; background: #333;
+hi LineNr   color:  DeepPink; background: #333; font-size: 12pt;
+hi Question   color: Yellow;  background:#333;  font-size: 12pt;
+hi WarningMsg   color: DeepPink;  background:#333;  font-size: 12pt;
+hi ErrorMsg   color: white;  background: red;  font-size: 12pt;
+hi NonText    background: #333;
+hi Null     color: CornflowerBlue;
+hi Tag      color: CornflowerBlue;
+
+hi CompTitle    color:  magenta; background: #222; font-weight: bold;
+hi CompItem[selected] color: DeepPink;  background: Black;
+hi CompDesc   color: Pink;
+
+hi Title    color:  white;
+hi Indicator    color:  DodgerBlue;
+hi String   color:  Orchid;
+hi Number   color:  Orchid;
+hi Object   color: Khaki;
+hi Function   color:  SkyBlue;
+hi URL    color:  LightGreen;
+
+hi TabNumber  color: white; font-weight: bold; font-size: 10pt;
+
+
+"style -name statusbar chrome://* <<EOM
+"#status-bar statusbarpanel { padding: 0 1px !important; }
+"statusbarpanel > * { margin: 0 !important; padding: 0 !important; }
+"EOM
+
+javascript <<JS
+let statusLine = document.getElementById("liberator-statusline");
+let bottomBar = document.getElementById("liberator-bottombar");
+
+// ステータスラインに戻る/進むを表示
+if(!document.getElementById("history-indicators")) {
+  let xml = <hbox id="history-indicators" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <label value="&lt;" id="back-indicator" class="history-indicator">
+      <observes element={document.getElementById("back-button").command} attribute="disabled" />
+    </label>
+    <label value="&gt;" id="forward-indicator" class="history-indicator">
+      <observes element={document.getElementById("forward-button").command} attribute="disabled" />
+    </label>
+  </hbox>;
+
+  statusLine.appendChild(document.adoptNode(new DOMParser().parseFromString(xml.toXMLString(), "application/xml").documentElement, true));
+}
+
+// ステータスバーにブックマークアイコンを移動
+let (statusBar = document.getElementById("status-bar")) {
+  let (id = "star-button") {
+    if(!document.getElementById("panel-" + id)) {
+      let panel = document.createElement("statusbarpanel");
+      panel.setAttribute("id", "panel-" + id);
+      let (icon = document.getElementById(id)) {
+        icon.setAttribute("class", "");
+        panel.appendChild(icon);
+      }
+      statusBar.insertBefore(panel, statusBar.firstChild);
+    }
+  }
+}
+
+// ステータスラインの横にステータスバーを移動
+let (statusBar = document.getElementById("status-bar")) {
+  statusBar.style.maxHeight = "20px";
+  bottomBar.appendChild(statusBar);
+}
+
+// ステータスラインにfaviconを移動
+let (favicon = document.getElementById("page-proxy-stack")) {
+  favicon.style.maxWidth = favicon.style.maxHeight = "20px"
+  statusLine.insertBefore(favicon, statusLine.firstChild);
+}
+JS
+
+style -name history-indicators chrome://browser/content/browser.xul <<CSS
+  #history-indicators {
+    padding: 0 ! important;
+  }
+  .history-indicator {
+    margin: 0 1px ! important;
+    color: WindowText;
+  }
+  .history-indicator[disabled="true"] {
+    //visibility: hidden;
+  }
+CSS
