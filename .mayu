@@ -1,2 +1,18 @@
-include "linux104.mayu"
+include "linux109.mayu"
 keymap Global
+mod mod0 = Henkan
+mod mod1 = Muhenkan
+key Hiragana = Esc
+key *S-M0-H = *S-Left
+key *S-M0-J = *S-Down
+key *S-M0-K = *S-Up
+key *S-M0-L = *S-Right
+key *S-M0-W = *S-C-Right
+key *S-M0-B = *S-C-Left
+key *S-M0-0 = *S-Home
+key *S-M0-4 = *S-End
+key *S-M0-Y = *S-C-Insert
+key *S-M0-P = S-Insert
+key *S-M0-T = *S-Tab
+key C-*H = BackSpace
+

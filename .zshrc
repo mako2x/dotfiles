@@ -1,18 +1,18 @@
 # Alias
-alias ls='ls -AF --color'
+alias la='ls -AF --color'
 alias ll='ls -l -h --color'
-alias lv="lv -c -E'vim -c %d"
 alias md='mkdir'
 alias rr='rm -i'
 alias df='df -h'
 alias vi='vim'
 alias s='sudo '
 alias tm='tmux'
+alias cf='coffee'
 alias apti='sudo apt-get install'
 alias aptu='sudo apt-get update'
 alias aptr='sudo apt-get remove'
 alias cc='chkconfig'
-alias rezsh='source ~/.zshrc'
+alias execzsh='exec $SHELL'
 alias remayu='sudo /etc/init.d/mayu restart'
 alias xclip='xclip -sel clip'
 
@@ -127,4 +127,16 @@ WORDCHARS="${WORDCHARS}|"
 function chpwd(){
   [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
 }
+
+# auto-fu.zsh
+if [ -f ~/.zsh/auto-fu.zsh ]; then
+  source ~/.zsh/auto-fu.zsh
+  function zle-line-init() {
+    auto-fu-init
+  }
+  zle -N zle-line-init
+  zstyle ':completion:*' completer _oldlist _complete
+  zstyle ':auto-fu:highlight' input bold
+  zstyle ':auto-fu:var' postdisplay ''
+fi
 

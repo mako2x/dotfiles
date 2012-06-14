@@ -23,6 +23,8 @@ NeoBundle 'othree/eregex.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
 NeoBundle 'mrtazz/simplenote.vim'
 NeoBundle 'jcf/vim-latex'
 NeoBundle 'Lokaltog/vim-powerline'
@@ -74,7 +76,7 @@ scriptencoding utf-8
 set nowritebackup
 set nobackup
 set directory=~/.vim/vimbackup
-set clipboard+=unnamed
+set clipboard=unnamed
 set nrformats-=octal
 set timeoutlen=3500
 set hidden
@@ -259,6 +261,18 @@ if has('syntax')
   augroup END
 endif
 
+
+""""""""""""""""""""""""""""""
+" Automatically replace "。" with "．" in Tex
+""""""""""""""""""""""""""""""
+function! s:subsitute_interpunction()
+  let pos = getpos(".")
+  silent execute "try | %s/。/．/g | catch | endtry"
+  silent execute "try | %s/、/，/g | catch | endtry"
+  call setpos(".", pos)
+endfunction
+
+autocmd! BufWrite *.tex call s:subsitute_interpunction()
 
 
 "----------------------------------------
