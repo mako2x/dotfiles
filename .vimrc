@@ -319,6 +319,15 @@ let g:vimfiler_safe_mode_by_default = 0
 " Open Directory in Current Buffer
 nnoremap <silent> <Leader>e :<C-u>VimFilerBufferDir<CR>
 
+""""""""""""""""""""""""""""""
+" vim-fugitive
+""""""""""""""""""""""""""""""
+nmap <silent> <Space>gc :Gcommit<CR>
+nmap <silent> <Space>gw :Gwrite<CR>
+nmap <silent> <Space>gr :Gread
+nmap <silent> <Space>gb :Gblame<CR>
+nmap <silent> <Space>gd :Gdiff<CR>
+nmap <silent> <Space>gs :Gstatus<CR>
 
 """"""""""""""""""""""""""""""
 " operator-replace

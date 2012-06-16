@@ -1,6 +1,7 @@
 # Alias
-alias la='ls -AF --color'
-alias ll='ls -l -h --color'
+alias ls='ls --color=auto'
+alias la='ls -FA --color=auto'
+alias ll='ls -Fals --color=auto'
 alias md='mkdir'
 alias rr='rm -i'
 alias df='df -h'
@@ -28,6 +29,7 @@ alias bruby='bundle exec ruby'
 alias brake='bundle exec rake'
 alias brails='bundle exec rails'
 alias bruckup='bundle exec ruckup'
+alias brspec='bundle exec rspec'
 alias rgem='rbenv exec gem'
 
 ## Edit Config
