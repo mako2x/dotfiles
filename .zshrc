@@ -1,13 +1,15 @@
+###################################
 # Alias
-alias ls='ls --color=auto'
-alias la='ls -FA --color=auto'
-alias ll='ls -Fals --color=auto'
+###################################
+alias ls='ls -GF'
+alias la='ls -AFG'
+alias ll='ls -FGals'
 alias md='mkdir'
 alias rr='rm -i'
 alias df='df -h'
 alias vi='vim'
 alias s='sudo '
-alias tm='tmux'
+alias tm='tmux -2'
 alias cf='coffee'
 alias apti='sudo apt-get install'
 alias aptu='sudo apt-get update'
@@ -16,8 +18,9 @@ alias cc='chkconfig'
 alias execzsh='exec $SHELL'
 alias remayu='sudo /etc/init.d/mayu restart'
 alias xclip='xclip -sel clip'
+alias mocha='mocha --reporter spec'
 
-## SSH
+## SSH & SCP
 alias sshsakura='ssh mako@49.212.23.11 -p 10022'
 alias sshisc='ssh mako@isc.sfc.wide.ad.jp -p 456 '
 alias sshwebedit='ssh t09366mk@webedit.sfc.keio.ac.jp'
@@ -33,14 +36,14 @@ alias brspec='bundle exec rspec'
 alias rgem='rbenv exec gem'
 
 ## Edit Config
-alias ezsh='vim ~/.zshrc'
-alias ezshenv='vim ~/.zshenv'
-alias evim='vim ~/.vimrc'
-alias evimp='vim ~/.vimperatorrc'
-alias evifm='vim ~/.vifm/vifmrc'
-alias etmux='vim ~/.tmux.conf'
-alias egit='vim ~/.gitconfig'
-alias emayu='vim ~/.mayu'
+alias ezsh='vim ~/dotfiles/.zshrc'
+alias ezshenv='vim ~/dotfiles/.zshenv'
+alias evim='vim ~/dotfiles/.vimrc'
+alias evimp='vim ~/dotfiles/.vimperatorrc'
+alias evifm='vim ~/dotfiles/.vifm/vifmrc'
+alias etmux='vim ~/dotfiles/.tmux.conf'
+alias egit='vim ~/dotfiles/.gitconfig'
+alias emayu='vim ~/dotfiles/.mayu'
 
 ## Shortcut
 alias cdm='cd /home/mako/'
@@ -49,21 +52,26 @@ alias cddt='cd ~/Desktop/'
 alias cddc='cd ~/Documents/'
 alias cdisc='cd ~/Documents/isc/'
 alias cddb='cd ~/Dropbox/'
-alias cdda='cd /media/Data/'
 
 
-# Key Bind
+###################################
+# Vim keybind
+###################################
 bindkey -v
 
 
+###################################
 # Change Directory
+###################################
 setopt auto_cd
 setopt auto_pushd
 cdpath=(~)
 chpwd_functions=($chpwd_functions dirs)
 
 
+###################################
 # History
+###################################
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
@@ -75,7 +83,9 @@ setopt share_history
 setopt no_flow_control
 
 
+###################################
 # Prompt
+###################################
 setopt prompt_subst
 setopt prompt_percent
 setopt transient_rprompt
@@ -86,7 +96,9 @@ RPROMPT="[%~]"
 SPROMPT="correct: %R -> %r ? "
 
 
-# Comletion
+###################################
+# Completion
+###################################
 autoload -U compinit
 compinit
 zstyle ':completion:*' format '%B%d%b'
@@ -106,31 +118,32 @@ setopt no_beep
 setopt numeric_glob_sort
 
 
-# 展開
-## --prefix=~/localというように「=」の後でも
-## 「~」や「=コマンド」などのファイル名展開を行う。
+###################################
+# Extending
+###################################
 setopt magic_equal_subst
-## 拡張globを有効にする。
-## glob中で「(#...)」という書式で指定する。
 setopt extended_glob
-## globでパスを生成したときに、パスがディレクトリだったら最後に「/」をつける。
 setopt mark_dirs
 
 
-# 単語
-## 「/」も単語区切りとみなす。
+###################################
+# Word
+###################################
 WORDCHARS=${WORDCHARS:s,/,,}
-## 「|」も単語区切りとみなす。
-## 2011-09-19
 WORDCHARS="${WORDCHARS}|"
 
 
+###################################
 # tmux
+###################################
 function chpwd(){
   [ -n $TMUX ] && tmux setenv TMUXPWD_$(tmux display -p "#I") $PWD
 }
 
+
+###################################
 # auto-fu.zsh
+###################################
 if [ -f ~/.zsh/auto-fu.zsh ]; then
   source ~/.zsh/auto-fu.zsh
   function zle-line-init() {
@@ -142,3 +155,10 @@ if [ -f ~/.zsh/auto-fu.zsh ]; then
   zstyle ':auto-fu:var' postdisplay ''
 fi
 
+
+###################################
+# mkdir & cd
+###################################
+function mkcd {
+  nocorrect mkdir -p "$1" && cd "$1"
+}

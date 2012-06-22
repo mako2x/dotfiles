@@ -42,13 +42,6 @@ filetype plugin indent on
 
 
 "----------------------------------------
-" Color Scheme
-"----------------------------------------
-colorscheme kulx
-
-
-
-"----------------------------------------
 " User Runtime Path Setting
 "----------------------------------------
 if isdirectory($HOME . '/.vim')
@@ -108,6 +101,9 @@ set iskeyword=a-z,A-Z,48-57
 "----------------------------------------
 " Visual Setting
 "----------------------------------------
+set t_Co=256
+syntax on
+colorscheme wombat256mod
 set shortmess+=I
 set noerrorbells
 set novisualbell
@@ -119,14 +115,13 @@ set expandtab
 set autoindent
 set cinoptions+=:0
 set notitle
-set cmdheight=2
+set cmdheight=1
 set laststatus=2
 set showcmd
 set display=lastline
 set nolist
-if &t_Co > 2 || has('gui_running')
-  syntax on
-endif
+
+
 
 
 
@@ -349,6 +344,11 @@ nmap ,st :Simplenote -t<CR>
 " open-browser
 """"""""""""""""""""""""""""""
 nmap <Leader>v <Plug>(openbrowser-smart-search)
+
+""""""""""""""""""""""""""""""
+" syntastic
+""""""""""""""""""""""""""""""
+let g:syntastic_javascript_chacker = 'jshint'
 
 """"""""""""""""""""""""""""""
 " zen-coding
