@@ -14,3 +14,9 @@
   br = branch
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	see = browse
+	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=iso
+[core]
+	editor = vim -c \"set fenc=utf-8\"
+	pager = lv -c
+[grep]
+	lineNumber = true

@@ -19,6 +19,9 @@ if [[ -f ~/.nodebrew/nodebrew ]]; then
   nodebrew use v0.6.19 > /dev/null
 fi
 
+## android-sdk
+export PATH=$HOME/android/android-sdk-linux/tools:$PATH
+
 
 ###################################
 # tmux

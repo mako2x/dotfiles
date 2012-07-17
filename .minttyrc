@@ -1,0 +1,13 @@
+BoldAsFont=no
+Transparency=low
+Font=M+2VM+IPAG circle
+FontHeight=12
+Locale=ja_JP
+Charset=UTF-8
+CursorType=block
+RightClickAction=paste
+ClicksTargetApp=no
+Columns=96
+Rows=28
+Term=xterm-256color
+ForegroundColour=231,231,231

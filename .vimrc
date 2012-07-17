@@ -25,10 +25,12 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
+NeoBundle 'mattn/mkdpreview-vim'
 NeoBundle 'mrtazz/simplenote.vim'
 NeoBundle 'jcf/vim-latex'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'L9'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'bbommarito/vim-slim'
@@ -94,7 +96,7 @@ set smartcase
 set wrapscan
 set incsearch
 set hlsearch
-set iskeyword=a-z,A-Z,48-57
+set iskeyword=a-z,A-Z,48-57,_,-,>
 
 
 
@@ -178,7 +180,10 @@ nnoremap l <Right>
 " No Highlight
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 
-" Open new tab
+" New Line
+nnoremap <CR> :<C-u>call append(expand('.'), '')<CR>j
+
+" Open New Tab
 nnoremap gn :tabnew<CR>
 
 " Move Tab
@@ -192,7 +197,6 @@ if has('folding')
   nnoremap <expr> l foldlevel(line('.')) ? "\<Right>zo" : "\<Right>"
 endif
 
-
 "----------------------------------------
 " Indert Mode
 "----------------------------------------
@@ -205,8 +209,8 @@ vnoremap v <ESC><S-V>
 vnoremap { "zdi{<C-R>z}<ESC>
 vnoremap [ "zdi[<C-R>z]<ESC>
 vnoremap ( "zdi(<C-R>z)<ESC>
-vnoremap 2 "zdi"<C-R>z"<ESC>
-vnoremap 7 "zdi'<C-R>z'<ESC>
+vnoremap " "zdi"<C-R>z"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
 vnoremap # "zdi#{<C-R>z}<ESC>
 vnoremap - "zdi<!-- <C-R>z--><ESC>
 
@@ -358,7 +362,7 @@ let g:user_zen_expandabbr_key = '<c-e>'
 """"""""""""""""""""""""""""""
 " vim-coffee-script
 """"""""""""""""""""""""""""""
-autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+"autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
 """"""""""""""""""""""""""""""
 " vim-powerline
