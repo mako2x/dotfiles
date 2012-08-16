@@ -28,6 +28,7 @@ no P p
 no U :undo<Space>
 no gn :tabnew<CR>
 no gh gH
+no H :history<Space>
 
 " Hint
 no m F

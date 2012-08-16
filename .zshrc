@@ -11,6 +11,7 @@ alias vi='vim'
 alias s='sudo '
 alias tm='tmux -2'
 alias cf='coffee'
+alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 alias apti='sudo apt-get install'
 alias aptu='sudo apt-get update'
 alias aptr='sudo apt-get remove'
@@ -20,11 +21,7 @@ alias remayu='sudo /etc/init.d/mayu restart'
 alias xclip='xclip -sel clip'
 alias mocha='mocha --reporter spec'
 alias webrick='ruby ~/bin/httpd.rb ./'
-
-## SSH & SCP
-alias sshsakura='ssh mako@49.212.23.11 -p 10022'
-alias sshisc='ssh mako@isc.sfc.wide.ad.jp -p 456 '
-alias sshwebedit='ssh t09366mk@webedit.sfc.keio.ac.jp'
+alias compassc='compass create --sass-dir "sass" --css-dir "css" --javascripts-dir "scripts" --images-dir "images" --syntax sass'
 
 ## Ruby rbenv & bundle
 alias bi='bundle install --path vendor/bundle'

@@ -362,7 +362,24 @@ let g:user_zen_expandabbr_key = '<c-e>'
 """"""""""""""""""""""""""""""
 " vim-coffee-script
 """"""""""""""""""""""""""""""
-"autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+
+""""""""""""""""""""""""""""""
+" sass
+""""""""""""""""""""""""""""""
+function! Sass_convert()
+  let sass = expand('%:p')
+  let filename = expand('%:t:r')
+  let sasspath = substitute(sass, '\v(/.*)/(.*)', '\1', '')
+  let parent = substitute(sasspath, '\v(/.*)/(.*)', '\1', '')
+  let css  = filename . '.css'
+  let cmd  = printf('sass -t compressed %s %s &', sass, css)
+  let res  = system(cmd)
+  if res != ''
+    echo res
+  endif
+endfunction
+"au! BufWritePost *.sass call Sass_convert()
 
 """"""""""""""""""""""""""""""
 " vim-powerline
