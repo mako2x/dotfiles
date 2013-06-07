@@ -1,0 +1,39 @@
+snippet html5
+  !!! 5
+
+snippet template
+  html(lang='ja')
+    head
+      meta(charset='UTF-8')
+      title ${1}
+      meta(name='description', content='')
+      meta(name='keywords', content='')
+      meta(name='viewport', content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0')
+      meta(name='apple-mobile-web-app-capable', content='yes')
+      meta(name='apple-mobile-web-app-status-bar-style', content='black')
+      link(rel='apple-touch-icon-precomposed', href='images/apple-touch-icon.png')
+      link(rel='apple-touch-startup-image', href='images/startup.png')
+      link(href='css/main.css', rel='stylesheet', type='text/css')
+      script(src='js/main.js')
+
+    body
+
+snippet script
+  script(src='js/${1}.js' type='text/javascript')
+
+snippet css
+  link(href='css/${1}.css', rel='stylesheet', type='text/css')
+
+snippet a
+  a(href='${1}') ${2}
+
+snippet img
+  img(src='${1}' alt='${2}')
+
+snippet ul
+  ul
+    li ${1}
+
+snippet element
+alias   el
+  ${1}(${2}='${3}')

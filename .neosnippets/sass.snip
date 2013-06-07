@@ -1,0 +1,282 @@
+snippet	background
+alias	  bg
+  background: ${1}
+
+snippet	backattachment
+alias	  ba
+  background-attachment: ${1}
+
+snippet	backcolor
+alias	bc
+  background-color: ${1}
+
+snippet	backimage
+alias	  bi
+  background-image: ${1}
+
+snippet	backposition
+alias	  bp
+  background-position: ${1}
+
+snippet	backrepeat
+alias	  br
+  background-repeat: ${1}
+
+
+snippet	border
+alias	  bo
+  border: ${1}px ${2} ${3}
+
+snippet	bordertop
+alias	  bot
+  border-top: ${1}px ${2} ${3}
+
+snippet	borderright
+alias	  bor
+  border-right: ${1}px ${2} ${3}
+
+snippet	borderbottom
+alias	  bob
+  border-bottom: ${1}px ${2} ${3}
+
+snippet	borderleft
+alias	  bol
+  border-left: ${1}px ${2} ${3}
+
+snippet borderradius
+alias   bora
+  +border-radius(${1}px)
+
+snippet	outline
+alias	  ol
+  outline: ${1}
+
+snippet	color
+alias	  co
+  color: #${1}
+
+snippet	letter-spacing
+alias	  ls
+  letter-spacing: ${1}
+
+snippet	line-height
+alias	  lh
+  line-height: ${1}
+
+snippet	text-align
+alias	  ta
+  text-align: ${1}
+
+snippet	text-decoration
+alias	  td
+  text-decoration: ${1}
+
+
+snippet	font
+alias	  fo
+  font: ${1}
+
+snippet	font-family
+alias	  ff
+  font-family: ${1}
+
+snippet	font-size
+alias	  fs
+  font-size: ${1}
+
+snippet	font-weight
+alias	  fw
+  font-weight: ${1}
+
+snippet	font-weight-bold
+alias	  bold
+  font-weight: bold
+
+
+snippet	margin
+alias	  ma
+  margin: ${1}
+
+snippet	margin-bottom
+alias	  mb
+  margin-bottom: ${1}
+
+snippet	margin-top
+alias 	mt
+  margin-top: ${1}
+
+snippet	margin-left
+alias	  ml
+  margin-left: ${1}
+
+snippet	margin-right
+alias 	mr
+  margin-right: ${1}
+
+snippet marginauto
+alias   maa
+  margin: 0 auto
+
+
+snippet	padding
+alias	  pa
+  padding: ${1}
+
+snippet	padding-bottom
+alias	  pb
+  padding-bottom: ${1}
+
+snippet	padding-top
+alias	  pt
+  padding-top: ${1}
+
+snippet	padding-left
+alias	  pl
+  padding-left: ${1}
+
+snippet	padding-right
+alias	  pr
+  padding-right: ${1}
+
+
+snippet	list-style-none
+alias	  lsn
+  list-style: none
+
+
+snippet	height
+alias	  he
+  height: ${1}px
+
+snippet	width
+alias	  wi
+  width: ${1}px
+
+snippet	max-height
+alias	  maxh
+  max-height: ${1}px
+
+snippet	max-width
+alias	  maxw
+  max-width: ${1}px
+
+snippet	min-height
+alias	  minh
+  min-height: ${1}px
+
+snippet	min-width
+alias	  minw
+  min-width: ${1}px
+
+
+snippet positionabsolute
+alias   posa
+  position: absolute
+
+snippet positionrelative
+alias   posr
+  position: relative
+
+
+snippet displaynone
+alias   dn
+  display: none
+
+snippet displayblock
+alias   db
+  display: block
+
+snippet displayinline
+alias   di
+  display: inline
+
+
+snippet top
+  top: ${1}px
+
+snippet right
+  right: ${1}px
+
+snippet bottom
+  bottom: ${1}px
+
+snippet left
+  left: ${1}px
+
+
+snippet floatleft
+alias   fl
+  float: left
+
+snippet floatright
+alias   fr
+  float: right
+
+snippet displaybox
+alias   box
+  +display-box
+
+snippet border-box
+alias   boxb
+  +box-sizing(border-box)
+
+snippet box-flex
+alias   boxf
+  +box-flex
+
+snippet box-pack
+alias   boxp
+  +box-pack
+
+snippet box-align
+alias   boxa
+  +box-align
+
+snippet comment
+alias   cm
+  /****************************************
+   * ${1}
+   ****************************************
+
+snippet responsive
+  @media only screen and (max-width:${1})
+  @media only screen and (min-width:${2})
+
+snippet cursor
+  cursor: ${1}
+
+snippet cursordefault
+alias   cursord
+  cursor: default
+
+snippet visibility
+alias   vi
+  visibility: ${1}
+
+snippet visibilityhidden
+alias   vih
+  visibility: hidden
+
+snippet visibilityvisible
+alias   viv
+  visibility: visible
+
+snippet firefoxhack
+  x:-moz-any-link, x:default
+
+snippet zindex
+  zindex: ${1}
+
+snippet textshadow
+alias   ts
+  text-shadow: ${1}px ${2}px ${3}px ${4}px ${5:color} 
+
+snippet rgb
+  rgb(${1},${2},${3})
+
+snippet rgba
+  rgba(${1},${2},${3},.${4})
+
+snippet image-url
+alias   img
+  image-url("${1}")

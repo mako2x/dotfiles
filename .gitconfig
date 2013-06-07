@@ -1,22 +1,28 @@
 [user]
-	name = mako2x
+	name  = mako2x
 	email = arekara3nen@gmail.com
 [github]
-	user = mako2x
+	user  = mako2x
 [color]
-	ui = auto
+	ui    = auto
 [alias]
-  cl = clone
-  ad = add .
-  co = checkout
-  cm = commit
-  st = status
-  br = branch
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	see = browse
+	cl    = clone
+	ad    = add -A
+	co    = checkout
+	cm    = commit
+	st    = status
+	br    = branch
+	lg    = log
+	df    = diff
+	fix   = commit --amend
+	rao   = remote add origin
+	pom   = push origin master
+	hist  = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	see   = browse
 	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=iso
 [core]
 	editor = vim -c \"set fenc=utf-8\"
-	pager = lv -c
+	pager  = lv -c
+	excludesfile = /Users/k/.gitignore
 [grep]
 	lineNumber = true

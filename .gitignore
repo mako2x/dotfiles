@@ -1,21 +1,13 @@
-*.o
-\#*#
-*#
-.#*
-.*~
-*~
+# OSX
 .DS_Store
-*.sw[po]
-tags
-TAGS
-Session.vim
-.svn
-*.dSYM
-*.log
-*.dvi
-*.aux
-*.elc
-.zshrc.local
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
 
-.vim/bundle/
-
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini

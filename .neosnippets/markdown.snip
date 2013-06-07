@@ -1,0 +1,68 @@
+snippet link
+alias   a
+abbr [link](url)
+  [${1}](${2})
+
+snippet linkid
+abbr    [link][id]
+  [${1:link}][${2:id}]${3}
+
+snippet linkemail
+abbr    [link](email)
+  [${1:link}](mailto:${2:email})${3}
+
+snippet linkurltitle
+abbr    [link](url "title")
+  [${1:link}](${2:url} "${3:title}")${4}
+
+snippet idurl
+abbr    [id]: url "title"
+  [${1:id}]: http://${2:url} "${3:title}"
+
+snippet idemail
+abbr    [id]: email "title"
+  [${1:id}]: mailto:${2:url} "${3:title}"
+
+snippet image
+alias   img
+abbr    ![alt](url)
+  ![${1:alt}](${2:url})${3}
+
+snippet altid
+abbr    ![alt][id]
+  ![${1:alt}][${2:id}]${3}
+
+snippet alturltitle
+abbr    ![alt](url "title")
+  ![${1:alt}](${2:url} "${3:title}")${4}
+
+snippet emphasis
+alias   em
+abbr    *emphasis*
+  *${1}*
+
+snippet strong
+alias   str
+abbr    **strong**
+  **${1}**
+
+snippet string
+alias   ss
+  '${1}'
+
+snippet string2
+alias   st
+  "${1}"
+
+snippet readme
+  ${1:title}
+  ===
+
+  Installation
+  ---
+
+  Usage
+  ---
+
+snippet more
+  <!-- more -->

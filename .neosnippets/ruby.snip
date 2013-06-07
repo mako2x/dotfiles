@@ -1,0 +1,167 @@
+snippet if
+abbr    if end
+  if ${1}
+    ${2}
+  end
+
+snippet unless
+alias   un
+abbr    unless end
+  unless ${1}
+    ${2}
+  end
+
+alias   unl
+  ${2} unless ${1}
+
+snippet re
+  return ${1}
+
+snippet returnif
+alias   reif
+  return ${1}if ${2}
+
+snippet returnunless
+alias   reun
+  return ${1}unless ${2}
+
+snippet case
+abbr    case when end
+  case ${1}
+  when ${2}
+    ${3}
+  else
+  end
+
+snippet module
+abbr    module end
+  module ${1}
+    ${2}
+  end
+
+snippet class
+abbr    class end
+  class ${1}
+    ${2}
+  end
+
+snippet def
+abbr    def method end
+  def ${1}
+    ${2}
+  end
+
+snippet defv
+abbr    def method() end
+  def ${1}(${2})
+    ${3}
+  end
+
+snippet defself
+alias   defs
+abbr    def self.method end
+  def self.${1}
+    ${2}
+  end
+
+snippet defselfv
+alias   defsv
+abbr    def self.method() end
+  def self.${1}(${2})
+    ${3}
+  end
+
+snippet init
+abbr    def initialize end
+  def initialize
+    ${1}
+  end
+
+snippet initv
+abbr    def initialize() end
+  def initialize(${1})
+    ${2}
+  end
+
+snippet do
+abbr    do |var| end
+  do |${1}|
+    ${2}
+  end
+
+snippet block
+alias   bb
+abbr    { |var| }
+  { |${1}| ${2} }
+
+snippet edn
+abbr    => end?
+  end
+
+snippet encodeutf8
+alias   en
+  #coding:utf-8
+
+snippet require
+alias   re
+  require '${1}'
+
+snippet require_bundler_setup
+alias   reb
+  require 'bundler/setup'
+
+snippet require_current
+alias   rec
+  require File.expand_path(File.dirname(__FILE__) + '/${1}')
+
+snippet load_path
+alias   lp
+  $:.unshift(File.expand_path(File.dirname(__FILE__)))
+
+snippet hh
+  :${1} => ${2},
+
+snippet sv
+  #{${1}}
+
+snippet it
+    it '${1}' do
+      ${2}
+    end
+
+snippet describe
+alias   desc
+  describe '${1}' do
+    ${2}
+  end
+
+snippet context
+  context '${1}' do
+    ${2}
+  end
+
+snippet file_each
+alias   feach
+  open(file, 'r') do |f|
+    while line = f.gets
+      line.chomp!
+      ${1}
+    end
+  end
+
+snippet rubygems
+alias   rg
+  source :rubygems
+
+snippet gem
+  gem '${1}'
+
+snippet task
+  task :${1} do
+    ${2}
+  end
+
+snippet ###
+  =begin
+    ${1}
+  =end

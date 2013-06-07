@@ -4,40 +4,45 @@
 set nocompatible
 filetype plugin indent off
 if has('vim_starting')
-  set runtimepath+=~/.vim/neobundle.vim
-  call neobundle#rc(expand('~/.vim/.bundle/'))
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
-NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'othree/eregex.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/gist-vim'
-NeoBundle 'mattn/mkdpreview-vim'
-NeoBundle 'mrtazz/simplenote.vim'
-NeoBundle 'jcf/vim-latex'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'ujihisa/repl.vim'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'L9'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'teramako/jscomplete-vim'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'jiangmiao/simple-javascript-indenter'
 NeoBundle 'bbommarito/vim-slim'
+NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'vim-scripts/JSON.vim'
 NeoBundle 'vim-scripts/jQuery'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'glidenote/memolist.vim'
 
 filetype plugin indent on
 
@@ -70,8 +75,9 @@ scriptencoding utf-8
 "----------------------------------------
 set nowritebackup
 set nobackup
+set noswapfile
 set directory=~/.vim/vimbackup
-set clipboard=unnamed
+set clipboard=unnamed,autoselect
 set nrformats-=octal
 set timeoutlen=3500
 set hidden
@@ -167,6 +173,33 @@ endfunction
 
 
 "----------------------------------------
+" Vim Script
+"----------------------------------------
+" Restore cursor
+augroup vimrcEx
+  autocmd!
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line('$') |
+    \   exe "normal! g`\"" |
+    \ endif
+augroup END
+
+
+" Zenkaku Space
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
+  silent! match ZenkakuSpace /　/
+endfunction
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd VimEnter,BufEnter * call ZenkakuSpace()
+  augroup END
+endif
+
+
+
+"----------------------------------------
 " Normal Mode
 "----------------------------------------
 " Move
@@ -183,19 +216,8 @@ nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 " New Line
 nnoremap <CR> :<C-u>call append(expand('.'), '')<CR>j
 
-" Open New Tab
-nnoremap gn :tabnew<CR>
-
-" Move Tab
-nnoremap <C-Tab> :tabnext<CR>
-nnoremap <C-S-Tab> :tabprevious<CR>
-
 " Mark
 nnoremap gm `
-
-if has('folding')
-  nnoremap <expr> l foldlevel(line('.')) ? "\<Right>zo" : "\<Right>"
-endif
 
 "----------------------------------------
 " Indert Mode
@@ -231,59 +253,20 @@ command! -nargs=* Emac set ff=mac
 
 
 "----------------------------------------
-" Vim Script
-"----------------------------------------
-""""""""""""""""""""""""""""""
-" Restore cursor
-""""""""""""""""""""""""""""""
-augroup vimrcEx
-  autocmd!
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line('$') |
-    \   exe "normal! g`\"" |
-    \ endif
-augroup END
-
-
-""""""""""""""""""""""""""""""
-" Zenkaku Space
-""""""""""""""""""""""""""""""
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-  silent! match ZenkakuSpace /　/
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd VimEnter,BufEnter * call ZenkakuSpace()
-  augroup END
-endif
-
-
-""""""""""""""""""""""""""""""
-" Automatically replace "。" with "．" in Tex
-""""""""""""""""""""""""""""""
-function! s:subsitute_interpunction()
-  let pos = getpos(".")
-  silent execute "try | %s/。/．/g | catch | endtry"
-  silent execute "try | %s/、/，/g | catch | endtry"
-  call setpos(".", pos)
-endfunction
-
-autocmd! BufWrite *.tex call s:subsitute_interpunction()
-
-
-"----------------------------------------
 " Plugin Settings
 "----------------------------------------
 """"""""""""""""""""""""""""""
 " neocomplcache
 """"""""""""""""""""""""""""""
 let g:neocomplcache_enable_at_startup = 1
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
-command! -nargs=* Esnippets NeoComplCacheEditSnippets
+
+""""""""""""""""""""""""""""""
+" neosnippet
+""""""""""""""""""""""""""""""
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+let g:neosnippet#snippets_directory='~/.neosnippets'
+command! -nargs=* Esnippets NeoSnippetEdit
 
 """"""""""""""""""""""""""""""
 " VimShell
@@ -296,27 +279,20 @@ nnoremap <silent> ,s :VimShell<CR>
 let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_filename_format = ""
 " Exit Unite
-nmap <buffer> <ESC> <Plug>(unite_exit)
+"nmap <buffer> <ESC> <Plug>(unite_exit)
 " Bookmark
 let g:unite_source_bookmark_directory = $HOME . '/.unite/bookmark'
 " Buffer
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> <Space>ub :<C-u>Unite buffer<CR>
 " File
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " Recent File
-nnoremap <silent> ,ur :<C-u>Unite file_mru<CR>
+nnoremap <silent> <Space>ur :<C-u>Unite file_mru<CR>
 " Marks
-nnoremap <silent> ,um :<C-u>Unite mark<CR>
+nnoremap <silent> <Space>um :<C-u>Unite mark<CR>
+" Outline
+nnoremap <silent> <Space>uo :Unite outline<CR>
 
-""""""""""""""""""""""""""""""
-" VimFiler
-""""""""""""""""""""""""""""""
-" Default Filer
-let g:vimfiler_as_default_explorer = 1
-" Disable Safety Mode
-let g:vimfiler_safe_mode_by_default = 0
-" Open Directory in Current Buffer
-nnoremap <silent> <Leader>e :<C-u>VimFilerBufferDir<CR>
 
 """"""""""""""""""""""""""""""
 " vim-fugitive
@@ -333,16 +309,6 @@ nmap <silent> <Space>gs :Gstatus<CR>
 """"""""""""""""""""""""""""""
 nmap _ <Plug>(operator-replace)
 
-""""""""""""""""""""""""""""""
-" simplenote
-""""""""""""""""""""""""""""""
-let g:SimplenoteUsername = "hoge@gmail.com"
-let g:SimplenotePassword = "***"
-nmap ,sn :Simplenote -n<CR>
-nmap ,sl :Simplenote -l<CR>
-nmap ,su :Simplenote -u<CR>
-nmap ,sd :Simplenote -d<CR>
-nmap ,st :Simplenote -t<CR>
 
 """"""""""""""""""""""""""""""
 " open-browser
@@ -362,10 +328,10 @@ let g:user_zen_expandabbr_key = '<c-e>'
 """"""""""""""""""""""""""""""
 " vim-coffee-script
 """"""""""""""""""""""""""""""
-autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+"autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
 """"""""""""""""""""""""""""""
-" sass
+" Sass
 """"""""""""""""""""""""""""""
 function! Sass_convert()
   let sass = expand('%:p')
@@ -388,16 +354,25 @@ let g:Powerline_symbols = 'fancy'
 set t_Co=256
 
 """"""""""""""""""""""""""""""
-" latex-vim
+" jscomplete-vim
 """"""""""""""""""""""""""""""
-let g:tex_flavor = 'latex'
-au BufNewFile,BufRead *.tex,*.latex,*.sty,*.dtk,*.ltx,*.bbl setf tex
-filetype plugin on
-set grepprg=grep\ -nH\ $*
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-let g:Tex_BibtexFlavor = 'jbibtex'
-let g:Tex_ViewRule_dvi = 'xdvi'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-let g:Tex_ViewRule_pdf = 'zathura'
+let g:jscomplete_use = ['dom', 'moz', 'es6th']
+
+""""""""""""""""""""""""""""""
+" vim-alignta
+""""""""""""""""""""""""""""""
+vnoremap a :Alignta <<0 \ /1<CR>
+
+""""""""""""""""""""""""""""""
+" memolist
+""""""""""""""""""""""""""""""
+let g:memolist_path = "$HOME/Dropbox/work/blog/src/_posts"
+let g:memolist_memo_suffix = "md"
+let g:memolist_template_dir_path = "$HOME/.memo_template"
+map <Space>jj :MemoNew<CR>
+map <Space>jl :MemoList<CR>
+
+""""""""""""""""""""""""""""""
+" jekyll.vim
+""""""""""""""""""""""""""""""
+let g:jekyll_path = "$HOME/Dropbox/work/blog/src"

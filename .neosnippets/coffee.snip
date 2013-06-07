@@ -1,0 +1,95 @@
+snippet require
+alias   re
+  ${1:object} = require('$1')
+
+snippet define
+alias   def
+  define [
+    '${1}'
+  ], (${2}) ->
+
+snippet lg
+  console.log ${0}
+
+snippet al
+  alert ${0}
+
+snippet if
+  if ${1}
+    ${2}
+
+snippet unless
+alias   un
+  unless ${1}
+    ${2} 
+
+alias   unl
+  ${2} unless ${1}
+
+snippet ife
+  if ${1}
+    ${2}
+  else
+    ${3}
+
+snippet elif
+  else if ${1}
+    ${2}
+
+snippet ift
+  if ${1} then ${2} else ${3}
+
+snippet switch
+  switch ${1}
+    when ${2}
+      ${3}
+    else
+
+snippet for
+  for ${1} in ${2}
+    ${3}
+
+snippet foro
+  for ${1} of ${2}
+    ${3}
+
+snippet try
+  try
+    ${1}
+  catch ${2:error}
+    ${3}
+
+snippet f
+  ->
+
+snippet ff
+  (${1}) ->
+
+snippet function
+snippet func
+  ${1} = ${2}->
+    ${3}
+
+snippet class
+alias   cla
+  class ${1}
+
+snippet constructor
+alias   init
+  constructor: ${1}->
+    ${2}
+
+snippet sv
+  #{${1}}
+
+snippet vv
+  <%= ${1} %>
+
+snippet underscore
+alias   _
+  _(${1}).${2}
+
+snippet jquery
+alias   jq
+  $('${1}')
+

@@ -41,15 +41,15 @@ no v YP
 noremap <leader>d y tsite:<C-v>
 
 " Bookmarks
-no <leader>w thttps://twitter.com/#!/mako2x/main<CR>
-no <leader>f tfacebook.com<CR>
-no <leader>g thttp://www.google.co.jp/reader/view/?hl=ja&tab=wy<CR>
-no <leader>c tgoogle.com/calendar<CR>
-no <leader>s thttps://vu8.sfc.keio.ac.jp/sfc-sfs/index.cgi?+en<CR>
+no _t thttps://twitter.com/#!/mako2x/main<CR>
+no _f tfacebook.com<CR>
+no _r thttp://www.google.co.jp/reader/view/?hl=ja&tab=wy<CR>
+no _c tgoogle.com/calendar<CR>
+no _m thttp://jp.admob.com/my_sites<CR>
 
 " Others
-no <leader>a :anc<CR>
-no <leader>p :set invprivate<CR>
+no _a :anc<CR>
+no _p :set invprivate<CR>
 no <S-y> :copy title<CR>
 no <C-Down> :set toolbars=navigation,menu<CR>
 no <C-Up> :set toolbars=nonavigation,nomenu<CR>
@@ -161,8 +161,7 @@ lazyfmapsgoogle -events=vkeypress <Up> <Down>
 
 " Twitter
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-lazy fmaps -urls='^https://twitter\.com/' j k ? .
-lazy fmaps -urls='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu
+lazy fmaps -urls='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
 
 " GoogleReader + Tombloo
 lazyfmapgooglereader -events=vkeyup <C-t> T

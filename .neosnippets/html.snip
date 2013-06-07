@@ -1,0 +1,57 @@
+snippet template
+  <!DOCTYPE html> 
+    <html lang="ja">
+    <head> 
+      <title>${1}</title>
+      <meta charset="UTF-8">
+      <link href="main.css" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="main.js"></script>
+    </head> 
+
+    <body>
+    </body> 
+  </html>
+
+snippet jquery
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">google.load("jquery", "1.7");</script>
+
+snippet script
+  <script type="text/javascript" src="${1}.js"></script>
+
+snippet css
+  <link href="${1}.css" rel="stylesheet" type="text/css">
+
+snippet a
+  <a href="${1}">${2}</a>
+
+snippet img
+  <img src="${1}" alt="${2}" />
+
+snippet ul
+  <ul>
+    <li>${1}</li>
+  </ul>
+
+snippet ol
+  <ol>
+    <li>${1}</li>
+  </ol>
+
+snippet br
+  <br />
+
+snippet element
+alias   el
+  <${1}><${2}/>
+
+snippet comment
+alias   cm
+  <!-- ${1} -->
+
+snippet id
+  id="${1}"
+
+snippet class
+alias   cl
+  class="${1}"
