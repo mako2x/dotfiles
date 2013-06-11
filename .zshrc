@@ -104,21 +104,21 @@ fi
 
 
 ###################################
+# z.sh
+###################################
+_Z_CMD=j
+source ~/.zsh/z.sh
+precmd() {
+  _z --add "$(pwd -P)"
+}
+
+
+###################################
 # bower
 ###################################
 if [ -f ~/.zsh/bower_completion.zsh ]; then
   source ~/.zsh/bower_completion.zsh
 fi
-
-
-###################################
-# Z
-###################################
-_Z_CMD=j
-. /usr/local/etc/profile.d/z.sh
-function _Z_precmd {
-  _z --add "$(pwd -P)" 61 }
-  precmd_functions=($precmd_functions _Z_precmd)
 
 
 ###################################
