@@ -38,7 +38,7 @@ no F ;F
 no s :tabopen<Space>google<Space>
 no c :hbt<Space>
 no v YP
-noremap <leader>d y tsite:<C-v>
+no <leader>d y tsite:<C-v>
 
 " Bookmarks
 no _t thttps://twitter.com/#!/mako2x/main<CR>
@@ -55,21 +55,21 @@ no <C-Down> :set toolbars=navigation,menu<CR>
 no <C-Up> :set toolbars=nonavigation,nomenu<CR>
 no ++ <C-a>
 no -- <C-x>
-cmap <Down> <TAB>
-cmap <Up> <S-TAB>
-cmap <C-n> <TAB>
-cmap <C-p> <S-TAB>
-cmap <C-h> <BS>
-cmap <C-i> <Tab>
-imap <C-h> <BS>
-imap <C-i> <Tab>
+cno <Down> <TAB>
+cno <Up> <S-TAB>
+cno <C-n> <TAB>
+cno <C-p> <S-TAB>
+cno <C-h> <BS>
+cno <C-i> <Tab>
+ino <C-h> <BS>
+ino <C-i> <Tab>
 
 
 
 "+----------------------------------------------------------------------------------------+
 " Settings
 "+----------------------------------------------------------------------------------------+
-set titlestring="Firefox"
+set titlestring='Firefox'
 set hintchars=hjklum
 set ic
 set hlsearch
@@ -78,7 +78,7 @@ set activate=homepage,quickmark,tabopen,paste
 set complete=sl
 set showstatuslinks=1
 set focuscontent
-let g:ldrc_enable = "false"
+let g:ldrc_enable = 'false'
 set! ui.caretWidth=8
 set! browser.cache.disk.enable=false
 set! browser.cache.memory.enable=true
@@ -128,14 +128,14 @@ EOM
 " https://github.com/hatena/hatena-bookmark-xul/wiki/Vimperator-%E3%81%A7%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%8B%A1%E5%BC%B5%E3%82%92%E4%BD%BF%E3%81%86
 javascript <<EOF
 liberator.globalVariables.hBookmark_shortcuts = {
-    hintsAdd     : 'a',
-    hintsComment : 'C',
-    add          : ['a'],
-    comment      : ['C'],
+  hintsAdd:     'a',
+  hintsComment: 'C',
+  add:          ['a'],
+  comment:      ['C'],
 };
 
-liberator.globalVariables.hBookmark_search_interval = 500;
-liberator.globalVariables.hBookmark_search_limit = 20;
+liberator.globalVariables.hBookmark_search_interval  = 500;
+liberator.globalVariables.hBookmark_search_limit     = 20;
 liberator.globalVariables.hBookmark_search_max_limit = 200;
 EOF
 
@@ -149,7 +149,6 @@ command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 command! -nargs=+ lazyfmapgooglereader  lazy fmap  -urls='http://www\.google\.(co\.jp|com)/reader' <args>
 command! -nargs=+ lazyfmapsgooglereader lazy fmaps -urls='http://www\.google\.(co\.jp|com)/reader' <args>
 command! -nargs=+ lazyfmapsgoogle lazy fmaps -urls='http://www\.google\.(co\.jp|com)/search\?' <args>
-"command! -nargs=+ lazyfmapstwitter lazy fmaps -urls='https://twitter\.com' <args>
 
 " Google Reader
 lazyfmapsgooglereader -events=vkeypress A r v O gh ga gs gt gu / ?
@@ -163,41 +162,37 @@ lazyfmapsgoogle -events=vkeypress <Up> <Down>
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 lazy fmaps -urls='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
 
-" GoogleReader + Tombloo
-lazyfmapgooglereader -events=vkeyup <C-t> T
-map -urls='http://www\.google\.co\.jp/reader/view' i <C-t>j
-
 
 
 "+----------------------------------------------------------------------------------------+
 " StatusLine
 "+----------------------------------------------------------------------------------------+
 javascript <<JS
-let statusLine = document.getElementById("liberator-statusline");
-let bottomBar = document.getElementById("liberator-bottombar");
+let statusLine = document.getElementById('liberator-statusline');
+let bottomBar = document.getElementById('liberator-bottombar');
 
 // Backword & Forword Button
-if(!document.getElementById("history-indicators")) {
-  let xml = <hbox id="history-indicators" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-    <label value="&lt;" id="back-indicator" class="history-indicator">
-      <observes element={document.getElementById("back-button").command} attribute="disabled" />
+if(!document.getElementById('history-indicators')) {
+  let xml = <hbox id='history-indicators' xmlns='http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul'>
+    <label value='&lt;' id='back-indicator' class='history-indicator'>
+      <observes element={document.getElementById('back-button').command} attribute='disabled' />
     </label>
-    <label value="&gt;" id="forward-indicator" class="history-indicator">
-      <observes element={document.getElementById("forward-button").command} attribute="disabled" />
+    <label value='&gt;' id='forward-indicator' class='history-indicator'>
+      <observes element={document.getElementById('forward-button').command} attribute='disabled' />
     </label>
   </hbox>;
 
-  statusLine.appendChild(document.adoptNode(new DOMParser().parseFromString(xml.toXMLString(), "application/xml").documentElement, true));
+  statusLine.appendChild(document.adoptNode(new DOMParser().parseFromString(xml.toXMLString(), 'application/xml').documentElement, true));
 }
 
 // Bookmark Icon
-let (statusBar = document.getElementById("status-bar")) {
-  let (id = "star-button") {
-    if(!document.getElementById("panel-" + id)) {
-      let panel = document.createElement("statusbarpanel");
-      panel.setAttribute("id", "panel-" + id);
+let (statusBar = document.getElementById('status-bar')) {
+  let (id = 'star-button') {
+    if(!document.getElementById('panel-' + id)) {
+      let panel = document.createElement('statusbarpanel');
+      panel.setAttribute('id', 'panel-' + id);
       let (icon = document.getElementById(id)) {
-        icon.setAttribute("class", "");
+        icon.setAttribute('class', '');
         panel.appendChild(icon);
       }
       statusBar.insertBefore(panel, statusBar.firstChild);
@@ -206,14 +201,14 @@ let (statusBar = document.getElementById("status-bar")) {
 }
 
 // StatusBar
-let (statusBar = document.getElementById("status-bar")) {
-  statusBar.style.maxHeight = "20px";
+let (statusBar = document.getElementById('status-bar')) {
+  statusBar.style.maxHeight = '20px';
   bottomBar.appendChild(statusBar);
 }
 
 // favicon
-let (favicon = document.getElementById("page-proxy-stack")) {
-  favicon.style.maxWidth = favicon.style.maxHeight = "20px"
+let (favicon = document.getElementById('page-proxy-stack')) {
+  favicon.style.maxWidth = favicon.style.maxHeight = '20px'
   statusLine.insertBefore(favicon, statusLine.firstChild);
 }
 JS
@@ -236,49 +231,31 @@ CSS
 "+----------------------------------------------------------------------------------------+
 " Color
 "+----------------------------------------------------------------------------------------+
-" ==VimperatorColorSchema==
-" name: Sweets enhanced by snaka. (Based on 'Sweets')
-" ==/VimperatorColorSchema==
-
-hi Hint font-family: monospace; font-size: 15px; font-weight: normal; color: lightyellow; background-color: rgba(30,30,30,.7); border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 5px 0px 5px; text-transform: uppercase; 
-
-hi HintElem background-color: pink; color: black;
-hi HintActive background-color: hotpink; color: white;
-
-"hi StatusLine     color:  CornflowerBlue; background: #000; font-weight: normal; font-size: 12pt;
-"hi StatusLineBroken   color:  black; background: #ffa0a0; font-weight: normal; font-size: 12pt;
-"hi StatusLineExtended color:  black; background: #a0ffa0; font-weight: normal; font-size: 12pt;
-"hi StatusLineSecure   color:  black; background: #a0a0ff; font-weight: normal; font-size: 12pt;
-
-hi Normal     color:  LightYellow;  background: #333; font-size: 12pt;
-hi CmdLine    color:  LightYellow;  background: #333; font-size: 14pt;
-hi InfoMsg    color:  LightYellow;  background: #333; font-size: 12pt;
-hi ModeMsg    color:  LightYellow;  background: #333; font-size: 12pt;
-hi MoreMsg    color:  LimeGreen; background: #333;
-hi LineNr   color:  DeepPink; background: #333; font-size: 12pt;
-hi Question   color: Yellow;  background:#333;  font-size: 12pt;
-hi WarningMsg   color: DeepPink;  background:#333;  font-size: 12pt;
-hi ErrorMsg   color: white;  background: red;  font-size: 12pt;
-hi NonText    background: #333;
-hi Null     color: CornflowerBlue;
-hi Tag      color: CornflowerBlue;
-
-hi CompTitle    color:  magenta; background: #222; font-weight: bold;
-hi CompItem[selected] color: DeepPink;  background: Black;
-hi CompDesc   color: Pink;
-
-hi Title    color:  white;
-hi Indicator    color:  DodgerBlue;
-hi String   color:  Orchid;
-hi Number   color:  Orchid;
-hi Object   color: Khaki;
-hi Function   color:  SkyBlue;
-hi URL    color:  LightGreen;
-
-hi TabNumber  color: white; font-weight: bold; font-size: 10pt;
-
-
-"style -name statusbar chrome://* <<EOM
-"#status-bar statusbarpanel { padding: 0 1px !important; }
-"statusbarpanel > * { margin: 0 !important; padding: 0 !important; }
-"EOM
+hi Hint               color: white;          background: rgba(30,30,30,.8); font: monospace 15px; text-transform: uppercase;
+hi HintElem           color: black;          background: pink;
+hi HintActive         color: white;          background: hotpink;
+hi Normal             color: white;          background: rgba(30,30,30,.9); font-size: 12pt;
+hi CmdLine            color: white;          background: #333;              font-size: 16pt; padding: 1px;
+hi InfoMsg            color: white;          background: #333;              font-size: 12pt;
+hi ModeMsg            color: white;          background: #333;              font-size: 12pt;
+hi MoreMsg            color: limegreen;      background: #333;              
+hi LineNr             color: deeppink;       background: #333;              font-size: 12pt;
+hi Question           color: yellow;         background: #333;              font-size: 12pt;
+hi WarningMsg         color: deeppink;       background: #333;              font-size: 12pt;
+hi ErrorMsg           color: white;          background: rgba(255,0,0,.9);  font-size: 12pt;
+hi Null               color: cornflowerblue;
+hi Tag                color: cornflowerblue;
+hi NonText                                   background: #333;
+hi Filter             color: deeppink;       background: none;              font-size: 12pt;
+hi CompTitle          width: 100%;
+hi CompTitle>*        color: white;          background: rgba(30,30,30,.9); font-size: 10px; padding: 3px;
+hi CompDesc           color: pink;
+hi CompItem[selected] color: deeppink;       background: black;
+hi Title              color: white;
+hi Indicator          color: dodgerblue;
+hi String             color: orchid;
+hi Number             color: orchid;
+hi Object             color: khaki;
+hi Function           color: skyblue;
+hi URL                color: lightgreen;
+hi TabNumber          color: white; font-size: 10pt; font-weight: bold; 

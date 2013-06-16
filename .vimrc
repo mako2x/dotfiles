@@ -1,6 +1,6 @@
-"----------------------------------------
+"========================================
 " NeoBundle
-"----------------------------------------
+"========================================
 set nocompatible
 filetype plugin indent off
 if has('vim_starting')
@@ -10,9 +10,8 @@ endif
 
 "let g:neobundle_default_git_protocol = 'https'
 
-
 NeoBundleLazy 'Shougo/unite.vim', {
-  \ 'autoload': { 'commands': 'Unite' } }
+  \ 'autoload': { 'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'] } }
 
 NeoBundleLazy 'ujihisa/unite-rake', {
   \ 'depends': 'Shougo/unite.vim' }
@@ -20,8 +19,10 @@ NeoBundleLazy 'ujihisa/unite-rake', {
 NeoBundleLazy 'Shougo/unite-outline', {
   \ 'autoload': { 'unite_sources': 'outline' } }
 
-NeoBundleLazy 'Shougo/neocomplcache', {
-  \ 'autoload': { 'insert': 1 } }
+NeoBundleLazy 'tsukkee/unite-tag', {
+  \ 'autoload': { 'unite_sources': 'tag' } }
+
+NeoBundleLazy 'Shougo/neocomplcache', '', 'same', {'autoload': { 'insert': 1 } }
 
 NeoBundleLazy 'Shougo/neocomplcache-rsense', {
   \ 'depends':  'Shougo/neocomplcache', 
@@ -51,42 +52,37 @@ NeoBundleLazy 'Shougo/vimfiler', {
   \   'commands': ['VimFiler', 'VimFilerExplorer', 'Edit', 'Write', 'Read', 'Source']
   \ }}
 
-NeoBundleLazy 'tyru/open-browser.vim', {
-  \ 'autoload': {
-  \   'functions': 'OpenBrowser', 
-  \   'commands':  ['OpenBrowser', 'OpenBrowserSearch'], 
-  \   'mappings':  '<Plug>(openbrowser-smart-search)'
-  \ }} 
-
-NeoBundleLazy 'kana/vim-smartinput', {
-  \ 'autoload': { 'insert': 1 } }
-NeoBundleLazy 'kana/vim-smartchr', {
-  \ 'autoload': { 'insert': 1 } }
-
 NeoBundle 'mattn/webapi-vim'
 NeoBundleLazy 'mattn/excitetranslate-vim', {
   \ 'autoload': { 'commands': 'ExciteTranslate' } }
 NeoBundleLazy 'mattn/gist-vim', {
   \ 'depends': 'mattn/webapi-vim',
   \ 'autoload': { 'commands': 'Gist' } }
-
 NeoBundleLazy 'kana/vim-operator-user'
 NeoBundleLazy 'kana/vim-operator-replace', {
   \ 'depends':  'vim-operator-user', 
   \ 'autoload': {
-  \ 'mappings': [
-  \   ['nx', '<Plug>(operator-replace)']]
+  \   'mappings': [['nx', '<Plug>(operator-replace)']]
   \ }}
+NeoBundleLazy 'kana/vim-smartinput', {
+  \ 'autoload': { 'insert': 1 } }
 
 NeoBundle 'L9'
+NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'ujihisa/repl.vim'
-NeoBundle 'tpope/vim-surround'
+NeoBundle 'ujihisa/repl.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'h1mesuke/vim-alignta'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'glidenote/memolist.vim'
+
+" Tags
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'szw/vim-tags'
 
 " Text Object
 NeoBundle 'kana/vim-textobj-user'
@@ -117,6 +113,8 @@ NeoBundleLazy 'miripiruni/CSScomb-for-Vim', {
   \ 'autoload': { 'filetypes': 'css' } }
 NeoBundleLazy 'lilydjwg/colorizer', {
   \ 'autoload': { 'filetypes': ['css', 'sass', 'scss', 'less'] } }
+NeoBundleLazy 'Sass', {
+  \ 'autoload': { 'filetypes': ['sass'] } }
 
 " Javascript
 NeoBundleLazy 'jQuery', {
@@ -143,18 +141,16 @@ NeoBundleLazy 'tpope/vim-endwise', {
   \ 'autoload': { 'insert': 1 } }
 
 " Markdown
-NeoBundleLazy 'chreekat/vim-instant-markdown', {
-  \ 'autoload': { 'filetypes': 'markdown' } }
-NeoBundleLazy 'Markdown', {
-  \ 'autoload': { 'filetypes': 'markdown' } }
+NeoBundle 'Markdown'
+NeoBundle 'kannokanno/previm'
 
 filetype plugin indent on
 
 
 
-"----------------------------------------
+"========================================
 " User Runtime Path Setting
-"----------------------------------------
+"========================================
 if isdirectory($HOME . '/.vim')
   let $MY_VIMRUNTIME = $HOME.'/.vim'
 elseif isdirectory($HOME . '\vimfiles')
@@ -165,18 +161,18 @@ endif
 
 
 
-"----------------------------------------
+"========================================
 " Script Encoding
-"----------------------------------------
+"========================================
 set encoding=utf-8
 silent! source $MY_VIMRUNTIME/pluginjp/encode.vim
 scriptencoding utf-8
 
 
 
-"----------------------------------------
+"========================================
 " System Setting
-"----------------------------------------
+"========================================
 set nowritebackup
 set nobackup
 set noswapfile
@@ -198,9 +194,9 @@ endif
 
 
 
-"----------------------------------------
+"========================================
 " Search
-"----------------------------------------
+"========================================
 set ignorecase
 set smartcase
 set wrapscan
@@ -210,9 +206,9 @@ set iskeyword=a-z,A-Z,48-57,_,-,>
 
 
 
-"----------------------------------------
+"========================================
 " Visual Setting
-"----------------------------------------
+"========================================
 set t_Co=256
 syntax on
 colorscheme wombat256mod
@@ -235,11 +231,9 @@ set nolist
 
 
 
-
-
-"----------------------------------------
+"========================================
 " diff/patch
-"----------------------------------------
+"========================================
 if has('win32') || has('win64')
   set diffexpr=MyDiff()
   function! MyDiff()
@@ -275,14 +269,13 @@ function! MyPatch()
 endfunction
 
 
-
-"----------------------------------------
+"========================================
 " Vim Script
-"----------------------------------------
-" Restore cursor
+"========================================
+" Restore Cursor
 augroup vimrcEx
-  autocmd!
-  autocmd BufReadPost *
+  au!
+  au BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line('$') |
     \   exe "normal! g`\"" |
     \ endif
@@ -295,17 +288,17 @@ function! ZenkakuSpace()
   silent! match ZenkakuSpace /　/
 endfunction
 if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd VimEnter,BufEnter * call ZenkakuSpace()
+  augroup zenkakuSpace
+    au!
+    au VimEnter,BufEnter * call ZenkakuSpace()
   augroup END
 endif
 
 
 
-"----------------------------------------
+"========================================
 " Normal Mode
-"----------------------------------------
+"========================================
 " Move
 nmap <Down> gj
 nmap <Up>   gk
@@ -314,23 +307,41 @@ nmap j gj
 nmap k gk
 nmap l <Right>
 
-" No Highlight
+" Buffer
+nmap <Space>bp :bp<CR>
+nmap <Space>bn :bn<CR>
+nmap <Space>bw :bw<CR>
+
+" Window
+nmap <Space>wh <C-w>h
+nmap <Space>wj <C-w>j
+nmap <Space>wk <C-w>k
+nmap <Space>wl <C-w>l
+
+" Clear Highlight
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
 " New Line
 nmap <CR> :<C-u>call append(expand('.'), '')<CR>j
 
+" Yank
+nmap Y y$
+
+" Select Last Changed Area
+nmap gz `[v`]
+
 " Mark
 nmap gm `
 
-"----------------------------------------
+
+"========================================
 " Indert Mode
-"----------------------------------------
+"========================================
 
 
-"----------------------------------------
+"========================================
 " Visual Mode
-"----------------------------------------
+"========================================
 vmap v <ESC><S-V>
 vmap { "zdi{<C-R>z}<ESC>
 vmap [ "zdi[<C-R>z]<ESC>
@@ -341,9 +352,9 @@ vmap # "zdi#{<C-R>z}<ESC>
 vmap - "zdi<!-- <C-R>z--><ESC>
 
 
-"----------------------------------------
+"========================================
 " Command Mode
-"----------------------------------------
+"========================================
 " Encode
 command! -nargs=* Eutf8 set fenc=utf-8
 command! -nargs=* Esjis set fenc=shift_jis
@@ -360,18 +371,20 @@ command! -nargs=* Emac set ff=mac
 " NeoBundle Install
 command! -nargs=* Install NeoBundleInstall
 
+" Alias
+command! -nargs=0 Wq wq
 
 
-"----------------------------------------
+"========================================
 " Plugin Settings
-"----------------------------------------
+"========================================
 """"""""""""""""""""""""""""""
 " Neocomplcache
 """"""""""""""""""""""""""""""
 let g:neocomplcache_enable_at_startup = 1
 
 """"""""""""""""""""""""""""""
-" Neocomplcache rsense
+" Neocomplcache Rsense
 """"""""""""""""""""""""""""""
 let g:neocomplcache#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3/libexec'
 
@@ -402,17 +415,23 @@ nmap <silent> ,t :ExciteTranslate<CR>
 " Unite
 """"""""""""""""""""""""""""""
 let g:unite_enable_start_insert = 1
-let g:unite_source_file_mru_filename_format = ""
-" Bookmark
+let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_bookmark_directory = $HOME . '/.unite/bookmark'
+let g:unite_source_history_yank_enable = 1
 " Buffer
 nmap <silent> <Space>ub :<C-u>Unite buffer<CR>
 " File
 nmap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " Recent File
 nmap <silent> <Space>ur :<C-u>Unite file_mru<CR>
+" Yank History
+nmap <silent> <Space>uy :<C-u>Unite history/yank<CR>
 " Outline
 nmap <silent> <Space>uo :Unite outline<CR>
+" Tags
+nmap <silent> <Space>tt :<C-u>UniteWithCursorWord -immediately tag<CR>
+nmap <silent> <Space>ta :<C-u>Unite tag<CR>
+
 
 """"""""""""""""""""""""""""""
 " Fugitive
@@ -443,12 +462,6 @@ vmap ab <Plug>(textobj-multiblock-a)
 vmap ib <Plug>(textobj-multiblock-i)
 
 """"""""""""""""""""""""""""""
-" Smart char
-""""""""""""""""""""""""""""""
-imap <expr> = smartchr#loop(' = ', ' == ', ' === ', '=')
-imap <expr> , smartchr#loop(', ', ',')
-
-""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""
 let g:syntastic_javascript_chacker = 'jshint'
@@ -464,14 +477,57 @@ let g:jscomplete_use = ['dom', 'moz', 'es6th']
 let g:user_zen_expandabbr_key = '<c-e>'
 
 """"""""""""""""""""""""""""""
+" TComment
+""""""""""""""""""""""""""""""
+let g:tcommentMapLeader1 = 'gc'
+
+""""""""""""""""""""""""""""""
+" Vim Tags
+""""""""""""""""""""""""""""""
+nmap <silent> <Space>tg :TagsGenerate<CR>
+
+""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""
+nmap <silent> <Space>tl :TagbarToggle<CR>
+let g:tagbar_width = 25
+let g:tagbar_autofocus = 1
+
+" Coffeetags
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
+endif
+
+""""""""""""""""""""""""""""""
+" Quick Run
+""""""""""""""""""""""""""""""
+let g:quickrun_config = {}
+let g:quickrun_config.coffee = {'command': 'coffee', 'cmdopt': '-pb'}
+
+""""""""""""""""""""""""""""""
 " Open Browser
 """"""""""""""""""""""""""""""
 nmap <Leader>v <Plug>(openbrowser-smart-search)
 
 """"""""""""""""""""""""""""""
-" Instant Markdown
+" Previm
 """"""""""""""""""""""""""""""
-let g:instant_markdown_slow = 1
+augroup previm
+  au!
+  au BufReadPost *.md,*.markdown PrevimOpen
+augroup END
 
 """"""""""""""""""""""""""""""
 " Powerline
@@ -482,7 +538,7 @@ let g:Powerline_symbols = 'fancy'
 " Memolist
 """"""""""""""""""""""""""""""
 let g:memolist_path = "$HOME/Dropbox/work/blog/src/_posts"
-let g:memolist_memo_suffix = "md"
+let g:memolist_memo_suffix = 'md'
 let g:memolist_template_dir_path = "$HOME/.memo_template"
 map <Space>jj :MemoNew<CR>
 map <Space>jl :MemoList<CR>

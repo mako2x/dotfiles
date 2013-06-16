@@ -1,8 +1,11 @@
 #!/bin/bash
 
-DOT_FILES=( .zshrc .zshenv .gitconfig .gitignore .tmux.conf .vimrc .vimperatorrc .vrapperrc .Xmodmap .neosnippets)
-
-for file in ${DOT_FILES[@]}
+for file in `ls -A $HOME/dotfiles | grep '^\.' | egrep -v '^\.git$|\.DS_Store'`
 do
+  if [ -a $HOME/$file ]; then
+    echo "File exists: $HOME/$file"
+  else
     ln -s $HOME/dotfiles/$file $HOME/$file
+    echo "Created symlink: $HOME/$file"
+  fi
 done
