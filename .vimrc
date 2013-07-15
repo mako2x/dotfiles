@@ -423,7 +423,8 @@ nmap <silent> <Space>ub :<C-u>Unite buffer<CR>
 " File
 nmap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " Recent File
-nmap <silent> <Space>ur :<C-u>Unite file_mru<CR>
+nmap <silent> <Space>ur :<C-u>Unite file_mru:short<CR>
+nmap <silent> <Space>uR :<C-u>Unite file_mru:long<CR>
 " Yank History
 nmap <silent> <Space>uy :<C-u>Unite history/yank<CR>
 " Outline

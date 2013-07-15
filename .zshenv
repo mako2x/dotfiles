@@ -20,7 +20,6 @@ fi
 # nodebrew
 if [[ -f $HOME/.nodebrew/nodebrew ]]; then
   export PATH=$HOME/.nodebrew/current/bin:$PATH
-  nodebrew use v0.6.19 > /dev/null
 fi
 
 # android-sdk

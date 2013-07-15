@@ -23,6 +23,7 @@ no <S-Down> :tabduplicate<CR>
 
 " Open Tab
 no o T
+no O :tabopen http://
 no p P
 no P p
 no U :undo<Space>
@@ -43,7 +44,6 @@ no <leader>d y tsite:<C-v>
 " Bookmarks
 no _t thttps://twitter.com/#!/mako2x/main<CR>
 no _f tfacebook.com<CR>
-no _r thttp://www.google.co.jp/reader/view/?hl=ja&tab=wy<CR>
 no _c tgoogle.com/calendar<CR>
 no _m thttp://jp.admob.com/my_sites<CR>
 
@@ -69,7 +69,7 @@ ino <C-i> <Tab>
 "+----------------------------------------------------------------------------------------+
 " Settings
 "+----------------------------------------------------------------------------------------+
-set titlestring='Firefox'
+set titlestring=Firefox
 set hintchars=hjklum
 set ic
 set hlsearch
@@ -231,7 +231,7 @@ CSS
 "+----------------------------------------------------------------------------------------+
 " Color
 "+----------------------------------------------------------------------------------------+
-hi Hint               color: white;          background: rgba(30,30,30,.8); font: monospace 15px; text-transform: uppercase;
+hi Hint               color: white;          background: rgba(30,30,30,.8); font: monospace 15px; padding: 2px 5px; text-transform: uppercase;
 hi HintElem           color: black;          background: pink;
 hi HintActive         color: white;          background: hotpink;
 hi Normal             color: white;          background: rgba(30,30,30,.9); font-size: 12pt;

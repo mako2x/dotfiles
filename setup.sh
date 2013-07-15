@@ -1,11 +1,14 @@
 #!/bin/bash
 
-for file in `ls -A $HOME/dotfiles | grep '^\.' | egrep -v '^\.git$|\.DS_Store'`
+cd `dirname $0`
+dir=`pwd`
+
+for file in `ls -A $dir | grep '^\.' | egrep -v '^\.git$|\.DS_Store'`
 do
   if [ -a $HOME/$file ]; then
     echo "File exists: $HOME/$file"
   else
-    ln -s $HOME/dotfiles/$file $HOME/$file
+    ln -s $dir/$file $HOME/$file
     echo "Created symlink: $HOME/$file"
   fi
 done
