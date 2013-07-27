@@ -177,7 +177,7 @@ set nowritebackup
 set nobackup
 set noswapfile
 set directory=~/.vim/vimbackup
-set clipboard=unnamed,autoselect
+set clipboard=unnamed
 set nrformats-=octal
 set timeoutlen=3500
 set hidden

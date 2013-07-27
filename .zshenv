@@ -23,7 +23,9 @@ if [[ -f $HOME/.nodebrew/nodebrew ]]; then
 fi
 
 # android-sdk
-export PATH=$HOME/android/android-sdk/tools:$PATH
+export ANDROID_HOME=$HOME/android-sdk
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+export PATH=$ANDROID_HOME:$PATH
 
 # bundle exec
 export PATH=./bin:$PATH

@@ -46,6 +46,7 @@ no _t thttps://twitter.com/#!/mako2x/main<CR>
 no _f tfacebook.com<CR>
 no _c tgoogle.com/calendar<CR>
 no _m thttp://jp.admob.com/my_sites<CR>
+no _r thttp://cloud.feedly.com/#latest<CR>
 
 " Others
 no _a :anc<CR>

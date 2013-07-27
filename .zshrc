@@ -213,9 +213,8 @@ alias ll='ls -FGals'
 alias mk='mkdir'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias vi='vim'
 alias s='sudo'
-alias tm='tmux -2'
+alias tm='tmux'
 alias rb='ruby'
 alias cf='coffee'
 alias bi='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
@@ -225,14 +224,22 @@ alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 alias df='df -h'
 alias clone='hub clone'
 alias xclip='xclip -sel clip'
-alias cot='open $1 -a /Applications/CotEditor.app'
-alias chrome='open $1 -a Google\ Chrome'
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
+case ${OSTYPE} in
+  darwin*)
+    alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+    alias cot='open $1 -a /Applications/CotEditor.app'
+    alias chrome='open $1 -a Google\ Chrome'
+    ;;
+  linux*)
+    alias vi='vim'
+    ;;
+esac
 
 ## Edit Config File
-alias ezsh='vim ~/dotfiles/.zshrc'
-alias ezshenv='vim ~/dotfiles/.zshenv'
-alias evim='vim ~/dotfiles/.vimrc'
+alias ezsh='vi ~/dotfiles/.zshrc'
+alias ezshenv='vi ~/dotfiles/.zshenv'
+alias evim='vi ~/dotfiles/.vimrc'
 
 ## Shortcut
 alias cdd='cd ~/Dropbox/'
