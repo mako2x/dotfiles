@@ -386,7 +386,7 @@ let g:neocomplcache_enable_at_startup = 1
 """"""""""""""""""""""""""""""
 " Neocomplcache Rsense
 """"""""""""""""""""""""""""""
-let g:neocomplcache#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3/libexec'
+"let g:neocomplcache#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3/libexec'
 
 """"""""""""""""""""""""""""""
 " Neosnippet
@@ -525,10 +525,12 @@ nmap <Leader>v <Plug>(openbrowser-smart-search)
 """"""""""""""""""""""""""""""
 " Previm
 """"""""""""""""""""""""""""""
-augroup previm
-  au!
-  au BufReadPost *.md,*.markdown PrevimOpen
-augroup END
+"augroup previm
+"  au!
+"  au BufReadPost *.md,*.markdown PrevimOpen
+"augroup END
+nmap <Leader>p :PrevimOpen<CR>
+
 
 """"""""""""""""""""""""""""""
 " Powerline

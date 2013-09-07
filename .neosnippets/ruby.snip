@@ -14,15 +14,15 @@ abbr    unless end
 alias   unl
   ${2} unless ${1}
 
-snippet re
+snippet ret
   return ${1}
 
 snippet returnif
-alias   reif
+alias   retif
   return ${1}if ${2}
 
 snippet returnunless
-alias   reun
+alias   retun
   return ${1}unless ${2}
 
 snippet case
@@ -51,7 +51,7 @@ abbr    def method end
     ${2}
   end
 
-snippet defv
+snippet defa
 abbr    def method() end
   def ${1}(${2})
     ${3}
@@ -64,20 +64,22 @@ abbr    def self.method end
     ${2}
   end
 
-snippet defselfv
-alias   defsv
+snippet defselfa
+alias   defsa
 abbr    def self.method() end
   def self.${1}(${2})
     ${3}
   end
 
-snippet init
+snippet definitialize
+alias   defi
 abbr    def initialize end
   def initialize
     ${1}
   end
 
-snippet initv
+snippet definitializearg
+alias   defia
 abbr    def initialize() end
   def initialize(${1})
     ${2}
@@ -94,6 +96,25 @@ alias   bb
 abbr    { |var| }
   { |${1}| ${2} }
 
+snippet ea
+  each do |${1}|
+    ${2}
+  end
+
+snippet eachone
+alias   eao
+  each { |${1}| ${2} }
+
+snippet map
+alias   map
+  map do |${1}|
+    ${2}
+  end
+
+snippet mapone
+alias   mao
+  map { |${1}| ${2} }
+
 snippet edn
 abbr    => end?
   end
@@ -109,6 +130,10 @@ alias   re
 snippet require_bundler_setup
 alias   reb
   require 'bundler/setup'
+
+snippet require_awesome_print
+alias   rea
+  require 'awesome_print'
 
 snippet require_current
 alias   rec
@@ -151,7 +176,7 @@ alias   feach
 
 snippet rubygems
 alias   rg
-  source :rubygems
+  source 'https://rubygems.org'
 
 snippet gem
   gem '${1}'

@@ -143,7 +143,7 @@ fi
 # mkdir & cd
 ###################################
 function mkcd {
-  nocorrect mkdir -p "$1" && cd "$1"
+  nocorrect mkdir -p "$1" && cd "$1" && pwd
 }
 
 
@@ -179,6 +179,19 @@ EOS
   [ "$RSERVER_VERBOSE" != no ] && echo "RSERVER_SCRIPT : ${RSERVER_SCRIPT}"
 
   ruby -e "$RSERVER_SCRIPT" $@
+}
+
+
+####################################
+## Auto rbenv rehash
+####################################
+function gem(){
+  $HOME/.rbenv/shims/gem $*
+  if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
+  then
+    rbenv rehash
+    rehash
+  fi
 }
 
 
@@ -219,7 +232,6 @@ alias rb='ruby'
 alias cf='coffee'
 alias bi='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
 alias bui='bundle install --path vendor/bundle'
-alias gem='rbenv exec gem'
 alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 alias df='df -h'
 alias clone='hub clone'
@@ -246,3 +258,61 @@ alias cdd='cd ~/Dropbox/'
 alias cddd='cd ~/Dropbox/doc/'
 alias cdw='cd ~/Dropbox/work/'
 alias cdk='cd ~/Desktop/'
+
+
+
+
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
