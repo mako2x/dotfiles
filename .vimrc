@@ -72,13 +72,13 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'ujihisa/repl.vim'
-NeoBundle 'ujihisa/repl.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'tpope/vim-surround'
 
 " Tags
 NeoBundle 'majutsushi/tagbar'
@@ -101,7 +101,7 @@ NeoBundleLazy 'mattn/zencoding-vim', {
   \ 'autoload': { 'filetypes': ['html', 'slim', 'haml', 'css', 'javascript'] } }
 NeoBundleLazy 'othree/html5.vim', {
   \ 'autoload': { 'filetypes': 'html' } }
-NeoBundleLazy 'bbommarito/vim-slim', {
+NeoBundleLazy 'slim-template/vim-slim', {
   \ 'autoload': { 'filetypes': 'slim' } }
 NeoBundleLazy 'digitaltoad/vim-jade', {
   \ 'autoload': { 'filetypes': 'jade' } }
@@ -143,6 +143,8 @@ NeoBundleLazy 'tpope/vim-endwise', {
 " Markdown
 NeoBundle 'Markdown'
 NeoBundle 'kannokanno/previm'
+NeoBundleLazy 'joker1007/vim-markdown-quote-syntax', {
+  \ 'autoload': { 'filetypes': 'markdown' } }
 
 filetype plugin indent on
 
@@ -447,7 +449,7 @@ nmap <silent> <Space>gs :Gstatus<CR>
 """"""""""""""""""""""""""""""
 " Operator Replace
 """"""""""""""""""""""""""""""
-nmap _ <Plug>(operator-replace)
+nmap R <Plug>(operator-replace)
 
 """"""""""""""""""""""""""""""
 " Alignta
@@ -550,3 +552,12 @@ map <Space>jl :MemoList<CR>
 " Jekyll
 """"""""""""""""""""""""""""""
 let g:jekyll_path = "$HOME/Dropbox/work/blog/src"
+
+
+""""""""""""""""""""""""""""""
+" Slim
+""""""""""""""""""""""""""""""
+augroup slim
+  au!
+  au BufReadPost *.slim set ft=slim
+augroup END

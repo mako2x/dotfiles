@@ -8,7 +8,7 @@
 
 	c         = commit
 	cm        = commit -m
-	cma       = commit -amend
+	cma       = commit --amend
 	cminit    = commit -m 'Initial commit'
 
 	s         = status
@@ -20,7 +20,8 @@
 	cod       = checkout develop
 	cb        = checkout -b
 
-	b         = branch -a
+	b         = branch
+	ba        = branch -a
 	br        = branch -r
 
 	d         = diff
@@ -50,8 +51,12 @@
 	po        = push origin
 	pom       = push origin master
 
+  r         = remote
+  rv        = remote -v
+  ra        = remote add
 	rao       = remote add origin
-	raogithub = !git remote add origin https://github.com/mako2x/$1.git
+	raogh     = !git remote add origin https://github.com/mako2x/$1.git
+	raobb     = !git remote add origin ssh://git@bitbucket.org/mako2x/$1.git
 
   this      = !git init && git add . && git commit -m \"initial commit\"
   alias     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort

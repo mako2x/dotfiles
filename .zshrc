@@ -66,6 +66,55 @@ setopt numeric_glob_sort
 
 
 ###################################
+# npm-completion
+###################################
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+
+
+###################################
 # Extending
 ###################################
 setopt magic_equal_subst
@@ -185,12 +234,26 @@ EOS
 ####################################
 ## Auto rbenv rehash
 ####################################
-function gem(){
+function gem() {
   $HOME/.rbenv/shims/gem $*
   if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
   then
     rbenv rehash
     rehash
+  fi
+}
+
+
+####################################
+## Create or Edit Gemfile
+####################################
+function gemfile() {
+  if [ -f Gemfile ]; then
+    vi Gemfile
+  else
+    bundle init
+    sleep 1
+    vi Gemfile
   fi
 }
 
@@ -215,6 +278,13 @@ function extract() {
 }
 
 
+####################################
+## Extract
+####################################
+function pagenerate() {
+  padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
+}
+
 
 
 ###################################
@@ -228,10 +298,8 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias s='sudo'
 alias tm='tmux'
-alias rb='ruby'
 alias cf='coffee'
-alias bi='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
-alias bui='bundle install --path vendor/bundle'
+
 alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 alias df='df -h'
 alias clone='hub clone'
@@ -248,6 +316,27 @@ case ${OSTYPE} in
     ;;
 esac
 
+## Ruby
+alias rb='ruby'
+alias b='bundle exec'
+alias bi='bundle install --path vendor/bundle'
+alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
+alias pa='bundle exec padrino'
+alias pas='bundle exec padrino start'
+alias pao='open http://localhost:3000'
+alias paoa='open http://localhost:3000/admin'
+alias par='bundle exec padrino rake'
+alias pards='bundle exec padrino rake db:seed'
+alias pardm='bundle exec padrino rake db:migrate'
+alias parr='bundle exec padrino rake routes'
+alias pars='bundle exec padrino rake spec'
+alias pag='bundle exec padrino g'
+alias pagm='bundle exec padrino g model'
+alias pagc='bundle exec padrino g controller'
+alias pagmi='bundle exec padrino g migration'
+alias paga='bundle exec padrino g admin'
+alias pagap='bundle exec padrino g admin_page'
+
 ## Edit Config File
 alias ezsh='vi ~/dotfiles/.zshrc'
 alias ezshenv='vi ~/dotfiles/.zshenv'
@@ -258,61 +347,3 @@ alias cdd='cd ~/Dropbox/'
 alias cddd='cd ~/Dropbox/doc/'
 alias cdw='cd ~/Dropbox/work/'
 alias cdk='cd ~/Desktop/'
-
-
-
-
-
-###-begin-npm-completion-###
-#
-# npm command completion script
-#
-# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
-#
-
-COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
-COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
-export COMP_WORDBREAKS
-
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
