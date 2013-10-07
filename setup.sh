@@ -12,3 +12,5 @@ do
     echo "Created symlink: $HOME/$file"
   fi
 done
+
+[ -a $dir/.gitconfig.local ] || cp $dir/.gitconfig.local.sample $dir/.gitconfig.local && echo "Created .gitconfig.local"
