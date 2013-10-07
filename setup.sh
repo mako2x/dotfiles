@@ -3,7 +3,7 @@
 cd `dirname $0`
 dir=`pwd`
 
-for file in `ls -A $dir | grep '^\.' | egrep -v '^\.git$|\.DS_Store'`
+for file in `ls -A $dir | grep '^\.' | egrep -v '^\.git$|\.DS_Store|\.gitconfig.local.sample'`
 do
   if [ -a $HOME/$file ]; then
     echo "File exists: $HOME/$file"

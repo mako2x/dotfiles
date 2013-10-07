@@ -1,3 +1,6 @@
+# Common
+.gitconfig.local
+
 # OSX
 .DS_Store
 .AppleDouble
