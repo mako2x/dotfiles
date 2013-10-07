@@ -17,6 +17,7 @@
 
 	co        = checkout
 	com       = checkout master
+  m         = checkout master
 	cod       = checkout develop
 	cb        = checkout -b
 
@@ -25,6 +26,7 @@
 	br        = branch -r
 
 	d         = diff
+	dc        = diff --cached
 	ds        = diff --staged
 	dn        = diff --name-only
 	dm        = diff master
@@ -46,6 +48,7 @@
 
 	l         = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	ll        = log --stat --abbrev-commit
+  t         = !tig
 
 	p         = push
 	po        = push origin
@@ -58,10 +61,25 @@
 	raogh     = !git remote add origin https://github.com/mako2x/$1.git
 	raobb     = !git remote add origin ssh://git@bitbucket.org/mako2x/$1.git
 
-  this      = !git init && git add . && git commit -m \"initial commit\"
-  alias     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
-  ignore    =!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
 	cl        = clone
+
+  # Make this a git repo
+  this      = !git init && git add . && git commit -m \"Initial commit\"
+
+  # Show all defined aliases
+  alias     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
+
+  # Amend with the same message
+  amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+
+  # Quickly add a file/dir to .gitignore.
+  ignore    =!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
+
+  # Create .gitignore file from gitignore.io
+  # e.g. $ git ignoreio osx linux ruby > .gitignore
+  #      $ git ignoreio list
+  ignoreio  = !"f() { local s=$1; shift; while [ $# -gt 0 ]; do s="$s,$1"; shift; done; curl "http://gitignore.io/api/$s"; }; f"
+
 [core]
 	editor       = vim -c \"set fenc=utf-8\"
 	pager        = lv -c

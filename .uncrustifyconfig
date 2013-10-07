@@ -162,13 +162,13 @@ align_on_tabstop = false
 # 数値を左揃えにするかどうか (align_struct_init_spanと関連) { true, false }
 align_number_left = false
 # プロトタイプ宣言と関数定義で、変数定義の位置を揃えるかどうか { true, false }
-align_func_params = true
+align_func_params = false
 # 同じ名前を持つシングルライン関数のパラメータの位置を揃えるかどうか (関数名はすでにそれぞれ位置合わせされていなければならない。) { true, false }
 align_same_func_call_params = false
 # 変数定義でのポインタの'*'の位置揃えの方法 { 0: 型の一部、1: 変数名の一部、2: ダングリング }
-align_var_def_star_style = 2
+align_var_def_star_style = 1
 # 変数定義での参照の'&'位置揃えの方法 { 0: 型の一部、1: 変数名の一部、2: ダングリング }
-align_var_def_amp_style = 2
+align_var_def_amp_style = 1
 # 構造体ビットフィールドの':'を位置揃えするかどうか { true, false }
 align_var_def_colon = true
 # 変数名の後の属性を位置揃えするかどうか { true, false }
@@ -176,7 +176,7 @@ align_var_def_attribute = false
 # struct/enum/unionのメンバ変数定義を位置揃えするかどうか { true, false }
 align_var_def_inline = true
 # 変数定義の位置揃えに対するラインスパン (0: 揃えない) { number }
-align_var_def_span = 1
+align_var_def_span = 0
 # 変数定義の位置揃えのカラム閾値 (0: 制限無し) { number }
 align_var_def_thresh = 0
 # 変数定義の位置揃えのカラムギャップ { number }

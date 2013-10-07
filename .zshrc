@@ -279,12 +279,19 @@ function extract() {
 
 
 ####################################
-## Extract
+## Padrino generate
 ####################################
 function pagenerate() {
   padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
 }
 
+
+####################################
+## Open localhost
+####################################
+function openl() {
+  open http://localhost:$1
+}
 
 
 ###################################
@@ -299,6 +306,8 @@ alias ....='cd ../../../'
 alias s='sudo'
 alias tm='tmux'
 alias cf='coffee'
+alias gi='git'
+alias g='git'
 
 alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 alias df='df -h'
@@ -321,6 +330,8 @@ alias rb='ruby'
 alias b='bundle exec'
 alias bi='bundle install --path vendor/bundle'
 alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
+alias brake='bundle exec rake'
+alias brakejp="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES"
 alias pa='bundle exec padrino'
 alias pas='bundle exec padrino start'
 alias pao='open http://localhost:3000'
