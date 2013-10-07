@@ -33,14 +33,34 @@ setopt no_flow_control
 ###################################
 # Prompt
 ###################################
+autoload -U colors; colors
+
+function rprompt-git-current-branch {
+        local name st color
+
+        if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
+                return
+        fi
+        name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+        if [[ -z $name ]]; then
+                return
+        fi
+        st=`git status 2> /dev/null`
+        if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+                color=${fg[green]}
+        elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+                color=${fg[yellow]}
+        elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+                color=${fg_bold[red]}
+        else
+                color=${fg[red]}
+        fi
+
+        echo "%{$color%}$name%{$reset_color%} "
+}
+
 setopt prompt_subst
-setopt prompt_percent
-setopt transient_rprompt
-autoload -Uz colors
-colors
-PROMPT="%(!.#.$) "
-RPROMPT="[%~]"
-SPROMPT="correct: %R -> %r ? "
+RPROMPT='[`rprompt-git-current-branch`%~]'
 
 
 ###################################
@@ -283,14 +303,6 @@ function extract() {
 ####################################
 function pagenerate() {
   padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
-}
-
-
-####################################
-## Open localhost
-####################################
-function openl() {
-  open http://localhost:$1
 }
 
 
