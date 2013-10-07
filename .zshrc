@@ -204,13 +204,12 @@ function mkcd {
 ###################################
 function timer {
  sleep `expr $1 '*' 60`
- /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -message "$1分経過" &
- say la la la la la la la la la la
+ say $1 minutes have passed
 }
 
 
 ###################################
-## Webrick
+# Webrick
 ####################################
 function webrick() {
   RSERVER_VERBOSE=no
@@ -235,7 +234,7 @@ EOS
 
 
 ####################################
-## Auto rbenv rehash
+# Auto rbenv rehash
 ####################################
 function gem() {
   $HOME/.rbenv/shims/gem $*
@@ -248,7 +247,7 @@ function gem() {
 
 
 ####################################
-## Create or Edit Gemfile
+# Create or Edit Gemfile
 ####################################
 function gemfile() {
   if [ -f Gemfile ]; then
@@ -262,7 +261,7 @@ function gemfile() {
 
 
 ####################################
-## Extract
+# Extract
 ####################################
 function extract() {
   case $1 in
@@ -282,7 +281,26 @@ function extract() {
 
 
 ####################################
-## Padrino generate
+# Generate random string
+# Usage:
+#   $ randstr hex 10
+#   $ randstr uuid
+####################################
+function randstr() {
+  ruby -rsecurerandom -e "puts SecureRandom.$1 $2"
+}
+
+
+####################################
+## Open localhost
+####################################
+function lh() {
+  open http://localhost:$1
+}
+
+
+####################################
+# Padrino generate
 ####################################
 function pagenerate() {
   padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
@@ -296,32 +314,77 @@ alias ls='ls -GF'
 alias la='ls -AFG'
 alias ll='ls -FGals'
 alias mk='mkdir'
-alias ...='cd ../../'
-alias ....='cd ../../../'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ...='cd ../../ && pwd'
+alias ....='cd ../../../ && pwd'
+alias .....='cd ../../../../ && pwd'
+alias df='df -h'
 alias s='sudo'
+alias so='source'
 alias tm='tmux'
+alias rb='ruby'
 alias cf='coffee'
+alias nd='node'
+alias gr='grunt'
 alias gi='git'
 alias g='git'
-
-alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
-alias df='df -h'
+alias tg='tig'
+alias github='hub browse'
 alias clone='hub clone'
-alias xclip='xclip -sel clip'
-alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
+alias gist='gist -c -o -p'
+alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
+
 case ${OSTYPE} in
   darwin*)
+    alias v='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-    alias cot='open $1 -a /Applications/CotEditor.app'
-    alias chrome='open $1 -a Google\ Chrome'
+    alias op='open'
+    alias ff='open -a FireFox'
+    alias gc="open -a Google\ Chrome"
+    alias safari="open -a Safari"
+    alias tb="open -a Thunderbird"
+    alias xcode="open -a Xcode"
+    alias eclipse="open -a Eclipse"
+    alias line="open -a Line"
+    alias skype="open -a Skype"
     ;;
   linux*)
+    alias v='vim'
     alias vi='vim'
     ;;
 esac
 
+# Global alias
+alias -g @l='| lv'
+alias -g @h='| head'
+alias -g @t='| tail'
+alias -g @g='| grep'
+alias -g @w='| wc'
+alias -g @x='| xargs'
+alias -g @s='&& say finished || say what the fuck'
+alias -g @n='&& terminal-notifier -message "Succeeded" || terminal-notifier -message "Failed"'
+if which pbcopy >/dev/null 2>&1 ; then 
+  alias -g @c='| pbcopy'
+elif which xsel >/dev/null 2>&1 ; then 
+  alias -g @c='| xsel --input --clipboard'
+elif which putclip >/dev/null 2>&1 ; then 
+  alias -g @c='| putclip'
+fi
+alias -g fzr='~/.zshrc'
+alias -g fze='~/.zshenv'
+alias -g fvr='~/.vimrc'
+alias -g fgc='~/.gitconfig'
+alias -g fgi='.gitignore'
+alias -g frm='README.md'
+alias -g frf='Rakefile'
+alias -g fgf='Gemfile'
+
+# Suffix alias
+alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
+
 ## Ruby
-alias rb='ruby'
 alias b='bundle exec'
 alias bi='bundle install --path vendor/bundle'
 alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
@@ -342,11 +405,6 @@ alias pagc='bundle exec padrino g controller'
 alias pagmi='bundle exec padrino g migration'
 alias paga='bundle exec padrino g admin'
 alias pagap='bundle exec padrino g admin_page'
-
-## Edit Config File
-alias ezsh='vi ~/dotfiles/.zshrc'
-alias ezshenv='vi ~/dotfiles/.zshenv'
-alias evim='vi ~/dotfiles/.vimrc'
 
 ## Shortcut
 alias cdd='cd ~/Dropbox/'

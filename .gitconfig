@@ -75,6 +75,9 @@
   # Quickly add a file/dir to .gitignore.
   ignore    =!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore
 
+  # Reset ignore file
+  ignorereset = !git rm -r --cached . && git add .
+
   # Create .gitignore file from gitignore.io
   # e.g. $ git ignoreio osx linux ruby > .gitignore
   #      $ git ignoreio list
