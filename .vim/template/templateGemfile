@@ -1,0 +1,6 @@
+:if search('<+CURSOR+>')
+: normal! "_da>
+:endif
+source 'https://rubygems.org'
+
+gem '<+CURSOR+>'

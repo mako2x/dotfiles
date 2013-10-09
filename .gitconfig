@@ -86,7 +86,7 @@
 [core]
 	editor       = vim -c \"set fenc=utf-8\"
 	pager        = lv -c
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 [grep]
 	lineNumber = true
 [merge]

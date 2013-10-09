@@ -53,6 +53,7 @@ NeoBundleLazy 'Shougo/vimfiler', {
   \ }}
 
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'thinca/vim-template'
 NeoBundleLazy 'mattn/excitetranslate-vim', {
   \ 'autoload': { 'commands': 'ExciteTranslate' } }
 NeoBundleLazy 'mattn/gist-vim', {
@@ -334,6 +335,9 @@ nmap gz `[v`]
 
 " Mark
 nmap gm `
+
+" Toggle spell check
+nmap <Space>s :<C-u>setl spell!<CR>
 
 
 "========================================

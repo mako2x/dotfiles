@@ -247,20 +247,6 @@ function gem() {
 
 
 ####################################
-# Create or Edit Gemfile
-####################################
-function gemfile() {
-  if [ -f Gemfile ]; then
-    vi Gemfile
-  else
-    bundle init
-    sleep 1
-    vi Gemfile
-  fi
-}
-
-
-####################################
 # Extract
 ####################################
 function extract() {
