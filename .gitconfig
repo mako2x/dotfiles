@@ -83,6 +83,8 @@
   #      $ git ignoreio list
   ignoreio  = !"f() { local s=$1; shift; while [ $# -gt 0 ]; do s="$s,$1"; shift; done; curl "http://gitignore.io/api/$s"; }; f"
 
+  rmbranch = !sh -c 'git branch -d $0 && git push origin :$0'
+
 [core]
 	editor       = vim -c \"set fenc=utf-8\"
 	pager        = lv -c

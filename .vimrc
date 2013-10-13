@@ -22,12 +22,19 @@ NeoBundleLazy 'Shougo/unite-outline', {
 NeoBundleLazy 'tsukkee/unite-tag', {
   \ 'autoload': { 'unite_sources': 'tag' } }
 
-NeoBundleLazy 'Shougo/neocomplcache', '', 'same', {'autoload': { 'insert': 1 } }
-
-NeoBundleLazy 'Shougo/neocomplcache-rsense', {
-  \ 'depends':  'Shougo/neocomplcache', 
-  \ 'autoload': { 'filetypes': 'ruby' }
-  \ }
+NeoBundleLazy 'Shougo/neocomplete.vim', {
+    \ "autoload": {"insert": 1}}
+let s:hooks = neobundle#get_hooks("neocomplete.vim")
+function! s:hooks.on_source(bundle)
+  let g:acp_enableAtStartup = 0
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let $DOTVIM = $HOME . '/.vim'
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'ruby' : $DOTVIM.'/dict/rubymotion.dict'
+      \ }
+endfunction
 
 NeoBundleLazy 'Shougo/neosnippet', {
   \ 'autoload': {
@@ -52,10 +59,10 @@ NeoBundleLazy 'Shougo/vimfiler', {
   \   'commands': ['VimFiler', 'VimFilerExplorer', 'Edit', 'Write', 'Read', 'Source']
   \ }}
 
+NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'thinca/vim-template'
-NeoBundleLazy 'mattn/excitetranslate-vim', {
-  \ 'autoload': { 'commands': 'ExciteTranslate' } }
 NeoBundleLazy 'mattn/gist-vim', {
   \ 'depends': 'mattn/webapi-vim',
   \ 'autoload': { 'commands': 'Gist' } }
@@ -313,6 +320,8 @@ nmap l <Right>
 " Buffer
 nmap <Space>bp :bp<CR>
 nmap <Space>bn :bn<CR>
+nmap <Space>bh :bp<CR>
+nmap <Space>bl :bn<CR>
 nmap <Space>bw :bw<CR>
 
 " Window
@@ -385,16 +394,6 @@ command! -nargs=0 Wq wq
 " Plugin Settings
 "========================================
 """"""""""""""""""""""""""""""
-" Neocomplcache
-""""""""""""""""""""""""""""""
-let g:neocomplcache_enable_at_startup = 1
-
-""""""""""""""""""""""""""""""
-" Neocomplcache Rsense
-""""""""""""""""""""""""""""""
-"let g:neocomplcache#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3/libexec'
-
-""""""""""""""""""""""""""""""
 " Neosnippet
 """"""""""""""""""""""""""""""
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -403,19 +402,9 @@ let g:neosnippet#snippets_directory='~/.neosnippets'
 command! -nargs=* Esnippets NeoSnippetEdit
 
 """"""""""""""""""""""""""""""
-" VimShell
-""""""""""""""""""""""""""""""
-nmap <silent> ,s :VimShell<CR>
-
-""""""""""""""""""""""""""""""
 " VimFiler
 """"""""""""""""""""""""""""""
-nmap <silent> ,v :VimFilerExplorer<CR>
-
-""""""""""""""""""""""""""""""
-" Excite Translate
-""""""""""""""""""""""""""""""
-nmap <silent> ,t :ExciteTranslate<CR>
+nmap <silent> <Space>f :VimFilerExplorer<CR>
 
 """"""""""""""""""""""""""""""
 " Unite
@@ -489,6 +478,15 @@ let g:user_zen_expandabbr_key = '<c-e>'
 let g:tcommentMapLeader1 = 'gc'
 
 """"""""""""""""""""""""""""""
+" Vim Easymotion
+""""""""""""""""""""""""""""""
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvb'
+let g:EasyMotion_leader_key="m"
+let g:EasyMotion_grouping=1
+hi EasyMotionTarget ctermbg=none ctermfg=red
+hi EasyMotionShade  ctermbg=none ctermfg=blue
+
+""""""""""""""""""""""""""""""
 " Vim Tags
 """"""""""""""""""""""""""""""
 nmap <silent> <Space>tg :TagsGenerate<CR>
@@ -531,10 +529,6 @@ nmap <Leader>v <Plug>(openbrowser-smart-search)
 """"""""""""""""""""""""""""""
 " Previm
 """"""""""""""""""""""""""""""
-"augroup previm
-"  au!
-"  au BufReadPost *.md,*.markdown PrevimOpen
-"augroup END
 nmap <Leader>p :PrevimOpen<CR>
 
 
@@ -565,3 +559,5 @@ augroup slim
   au!
   au BufReadPost *.slim set ft=slim
 augroup END
+
+nmap ! :Switch<CR>
