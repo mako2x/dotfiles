@@ -1,0 +1,100 @@
+###################################
+# mkdir & cd
+###################################
+function mkcd {
+  nocorrect mkdir -p "$1" && cd "$1" && pwd
+}
+
+
+###################################
+# timer
+###################################
+function timer {
+ sleep `expr $1 '*' 60`
+ say $1 minutes have passed
+}
+
+
+###################################
+# Webrick
+####################################
+function webrick() {
+  RSERVER_VERBOSE=no
+  [ "$RSERVER_VERBOSE" != no ] && echo "arguments : $@"
+
+  RSERVER_SCRIPT=`cat <<EOS
+require 'webrick'
+
+doc_root = ARGV.shift || 'html'
+doc_root = File::join(Dir::pwd, doc_root)
+server = WEBrick::HTTPServer::new( :Port => 8888, :DocumentRoot => doc_root)
+trap("INT") {
+server.shutdown
+}
+server.start;
+EOS
+`
+  [ "$RSERVER_VERBOSE" != no ] && echo "RSERVER_SCRIPT : ${RSERVER_SCRIPT}"
+
+  ruby -e "$RSERVER_SCRIPT" $@
+}
+
+
+####################################
+# Auto rbenv rehash
+####################################
+function gem() {
+  $HOME/.rbenv/shims/gem $*
+  if [ "$1" = "install" ] || [ "$1" = "i" ] || [ "$1" = "uninstall" ] || [ "$1" = "uni" ]
+  then
+    rbenv rehash
+    rehash
+  fi
+}
+
+
+####################################
+# Extract
+####################################
+function extract() {
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf $1;;
+    *.tar.xz) tar Jxvf $1;;
+    *.zip) unzip $1;;
+    *.lzh) lha e $1;;
+    *.tar.bz2|*.tbz) tar xjvf $1;;
+    *.tar.Z) tar zxvf $1;;
+    *.gz) gzip -dc $1;;
+    *.bz2) bzip2 -dc $1;;
+    *.Z) uncompress $1;;
+    *.tar) tar xvf $1;;
+    *.arj) unarj $1;;
+  esac
+}
+
+
+####################################
+# Generate random string
+# Usage:
+#   $ randstr hex 10
+#   $ randstr uuid
+####################################
+function randstr() {
+  ruby -rsecurerandom -e "puts SecureRandom.$1 $2"
+}
+
+
+####################################
+## Open localhost
+####################################
+function lh() {
+  open http://localhost:$1
+}
+
+
+####################################
+# Padrino generate
+####################################
+function pagenerate() {
+  padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
+}

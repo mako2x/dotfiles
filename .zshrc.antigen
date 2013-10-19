@@ -1,0 +1,20 @@
+source ~/.zsh/antigen/antigen.zsh
+
+antigen-bundle hchbaw/auto-fu.zsh
+antigen-bundle bundler
+antigen-bundle vagrant
+
+antigen-apply
+
+
+# auto-fu.zsh
+if [ -f ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-hchbaw-SLASH-auto-fu.zsh.git/auto-fu.zsh ]; then
+  source ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-hchbaw-SLASH-auto-fu.zsh.git/auto-fu.zsh
+  function zle-line-init() {
+    auto-fu-init
+  }
+  zle -N zle-line-init
+  zstyle ':completion:*' completer _oldlist _complete
+  zstyle ':auto-fu:highlight' input bold
+  zstyle ':auto-fu:var' postdisplay ''
+fi
