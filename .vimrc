@@ -101,7 +101,7 @@ NeoBundle 'thinca/vim-textobj-plugins'
 
 " Display
 NeoBundle 'wombat256.vim'
-NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'kien/rainbow_parentheses.vim'
 
 " HTML & CSS
@@ -238,7 +238,6 @@ set laststatus=2
 set showcmd
 set display=lastline
 set nolist
-
 
 
 "========================================
@@ -533,9 +532,15 @@ nmap <Leader>p :PrevimOpen<CR>
 
 
 """"""""""""""""""""""""""""""
-" Powerline
+" Lightline
 """"""""""""""""""""""""""""""
-let g:Powerline_symbols = 'fancy'
+let g:lightline = {
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
 
 """"""""""""""""""""""""""""""
 " Memolist

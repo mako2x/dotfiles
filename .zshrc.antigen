@@ -1,7 +1,6 @@
 source ~/.zsh/antigen/antigen.zsh
 
 antigen-bundle hchbaw/auto-fu.zsh
-antigen-bundle bundler
 antigen-bundle vagrant
 
 antigen-apply

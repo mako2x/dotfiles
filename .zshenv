@@ -11,16 +11,23 @@ PATH=$PATH:/usr/sbin
 PATH=$PATH:/usr/local/sbin
 
 # rbenv
-if [ -d $HOME/.rbenv  ]; then
+if [ -d $HOME/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="$HOME/.rbenv/shims:$PATH"
   eval "$(rbenv init -)"
 fi
 
 # nodebrew
-if [[ -f $HOME/.nodebrew/nodebrew ]]; then
+if [ -d $HOME/.nodebrew ]; then
   export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
+
+# phpenv
+if [ -d $HOME/.phpenv ]; then
+  export PATH="$HOME/.phpenv/bin:$PATH"
+  eval "$(phpenv init -)"
+fi
+
 
 # android-sdk
 export ANDROID_HOME=$HOME/android-sdk

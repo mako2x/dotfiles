@@ -19,7 +19,6 @@ alias tg='tig'
 alias github='hub browse'
 alias clone='hub clone'
 alias gist='gist -c -o -p'
-alias vg='vagrant'
 alias rgrep='find . -prune -o -type f -print0 | xargs -0 grep'
 
 case ${OSTYPE} in
@@ -77,8 +76,9 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 alias b='bundle exec'
 alias bi='bundle install --path vendor/bundle'
 alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bundle'
-alias brake='bundle exec rake'
-alias brakejp="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES"
+alias br='bundle exec rake'
+alias brd='bundle exec rake device'
+alias brs="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES"
 alias pa='bundle exec padrino'
 alias pas='bundle exec padrino start'
 alias pao='open http://localhost:3000'
@@ -94,6 +94,18 @@ alias pagc='bundle exec padrino g controller'
 alias pagmi='bundle exec padrino g migration'
 alias paga='bundle exec padrino g admin'
 alias pagap='bundle exec padrino g admin_page'
+
+# Vagrant
+alias vg='vagrant'
+alias vgu='vagrant up'
+alias vgp='vagrant provision'
+alias vgh='vagrant halt'
+alias vgd='vagrant destroy'
+alias vgs='vagrant snapshot'
+alias vgst='vagrant snapshot take'
+alias vgsg='vagrant snapshot go'
+alias vgsl='vagrant snapshot list'
+alias vgsd='vagrant snapshot delete'
 
 ## Shortcut
 alias cdd='cd ~/Dropbox/'
