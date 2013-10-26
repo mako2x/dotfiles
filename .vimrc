@@ -102,6 +102,7 @@ NeoBundle 'thinca/vim-textobj-plugins'
 " Display
 NeoBundle 'wombat256.vim'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'kien/rainbow_parentheses.vim'
 
 " HTML & CSS
@@ -387,6 +388,8 @@ command! -nargs=* Install NeoBundleInstall
 
 " Alias
 command! -nargs=0 Wq wq
+command! -nargs=0 Ws !sudo tee % > /dev/null
+command! -nargs=0 Finder !open .
 
 
 "========================================
@@ -530,17 +533,37 @@ nmap <Leader>v <Plug>(openbrowser-smart-search)
 """"""""""""""""""""""""""""""
 nmap <Leader>p :PrevimOpen<CR>
 
-
 """"""""""""""""""""""""""""""
 " Lightline
 """"""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'component': {
-      \   'readonly': '%{&readonly?"x":""}',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+\   'component': {
+\     'readonly': '%{&readonly?"x":""}',
+\   },
+\   'separator': { 'left': '', 'right': '' },
+\   'subseparator': { 'left': '|', 'right': '|' },
+\   'active': {
+\     'left': [
+\       ['mode', 'paste'],
+\       ['readonly', 'filename', 'modified', 'anzu']
+\     ]
+\   },
+\   'component_function': {
+\     'anzu': 'anzu#search_status'
+\   }
+\ }
+
+""""""""""""""""""""""""""""""
+" Vim anzu
+""""""""""""""""""""""""""""""
+nmap n <Plug>(anzu-n)
+nmap N <Plug>(anzu-N)
+nmap * <Plug>(anzu-star)
+nmap # <Plug>(anzu-sharp)
+augroup vim-anzu
+  autocmd!
+  autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
+augroup END
 
 """"""""""""""""""""""""""""""
 " Memolist
