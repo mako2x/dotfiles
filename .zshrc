@@ -158,9 +158,6 @@ function chpwd(){
 }
 
 
-[ -f ~/.zshrc.antigen ]  && source ~/.zshrc.antigen
 [ -f ~/.zshrc.alias ]    && source ~/.zshrc.alias
 [ -f ~/.zshrc.function ] && source ~/.zshrc.function
-#[ -f ~/.zsh/zshrc.antigen ]  && source ~/.zsh/zshrc.antigen
-#[ -f ~/.zsh/zshrc.alias ]    && source ~/.zsh/zshrc.alias
-#[ -f ~/.zsh/zshrc.function ] && source ~/.zsh/zshrc.function
+[ -f ~/.zshrc.plugin ]   && source ~/.zshrc.plugin

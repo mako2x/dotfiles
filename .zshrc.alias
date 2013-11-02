@@ -79,6 +79,7 @@ alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bun
 alias br='bundle exec rake'
 alias brd='bundle exec rake device'
 alias brs="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES"
+alias brsp='bundle exec rake spec'
 alias pa='bundle exec padrino'
 alias pas='bundle exec padrino start'
 alias pao='open http://localhost:3000'
