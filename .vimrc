@@ -106,8 +106,8 @@ NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'kien/rainbow_parentheses.vim'
 
 " HTML & CSS
-NeoBundleLazy 'mattn/zencoding-vim', {
-  \ 'autoload': { 'filetypes': ['html', 'slim', 'haml', 'css', 'javascript'] } }
+NeoBundleLazy 'mattn/emmet-vim', {
+  \ 'autoload': { 'filetypes': ['html', 'erb'] } }
 NeoBundleLazy 'othree/html5.vim', {
   \ 'autoload': { 'filetypes': 'html' } }
 NeoBundleLazy 'slim-template/vim-slim', {
@@ -127,8 +127,6 @@ NeoBundleLazy 'Sass', {
 
 " Javascript
 NeoBundleLazy 'jQuery', {
-  \ 'autoload': { 'filetypes': 'javascript' } }
-NeoBundleLazy 'teramako/jscomplete-vim', {
   \ 'autoload': { 'filetypes': 'javascript' } }
 NeoBundleLazy 'jelera/vim-javascript-syntax', {
   \ 'autoload': { 'filetypes': 'javascript' } }

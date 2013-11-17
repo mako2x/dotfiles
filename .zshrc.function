@@ -98,3 +98,22 @@ function lh() {
 function pagenerate() {
   padrino g project $1 -t rspec -e slim -c compass -s jquery -d datamapper -b
 }
+
+
+####################################
+# Checksum
+####################################
+function checksum() {
+  shasum -a 256 $1 | sed -e "s/^\(.\{64\}\).*/\1/"
+}
+
+####################################
+# Clone from github
+####################################
+function clone() {
+  if [ $# -eq 1 ]; then
+    git clone https://github.com/$1.git
+  else
+    git clone https://github.com/$1/$3.git
+  fi
+}
