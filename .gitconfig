@@ -86,9 +86,10 @@
   rmbranch = !sh -c 'git branch -d $0 && git push origin :$0'
 
 [core]
-	editor       = vim -c \"set fenc=utf-8\"
-	pager        = lv -c
-	excludesfile = ~/.gitignore_global
+	editor         = vim -c \"set fenc=utf-8\"
+	pager          = lv -c
+	excludesfile   = ~/.gitignore_global
+	attributesfile = ~/.gitattributes_global
 [grep]
 	lineNumber = true
 [merge]
