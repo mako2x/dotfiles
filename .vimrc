@@ -461,6 +461,7 @@ vmap ib <Plug>(textobj-multiblock-i)
 " Syntastic
 """"""""""""""""""""""""""""""
 let g:syntastic_javascript_chacker = 'jshint'
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['php'] }
 
 """"""""""""""""""""""""""""""
 " JS Complete

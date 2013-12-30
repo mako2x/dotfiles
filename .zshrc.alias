@@ -1,6 +1,7 @@
 alias ls='ls -GF'
 alias la='ls -AFG'
 alias ll='ls -FGals'
+alias rm='rmtrash'
 alias mk='mkdir'
 alias ...='cd ../../ && pwd'
 alias ....='cd ../../../ && pwd'
