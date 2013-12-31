@@ -1,0 +1,6 @@
+mysql:bind '^U' vi-kill-line-prev
+mysql:bind '^W' ed-delete-prev-word
+
+mysql:bind -s "^xd" "show databases;"
+mysql:bind -s "^xt" "show tables;"
+mysql:bind -s "^xs" "select * from "
