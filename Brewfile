@@ -8,7 +8,7 @@ upgrade
 tap homebrew/versions || true
 tap phinze/homebrew-cask || true
 tap homebrew/binary || true
-tap mako2x/homebrew-cask || true
+tap mako2x/homebrew-mycask || true
 
 # Packages
 install brew-cask
@@ -33,6 +33,7 @@ install apple-gcc42
 install readline
 install openssl
 install optipng
+install md5sha1sum
 
 # .dmg
 cask install iterm2

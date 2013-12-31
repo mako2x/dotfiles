@@ -29,6 +29,7 @@ no P p
 no U :undo<Space>
 no gn :tabnew<CR>
 no gh gH
+no gH gh
 no H :history<Space>
 
 " Hint
@@ -39,18 +40,19 @@ no F ;F
 no s :tabopen<Space>google<Space>
 no c :hbt<Space>
 no v YP
-no <leader>d y tsite:<C-v>
 
 " Bookmarks
 no _t thttps://twitter.com/#!/mako2x/main<CR>
+no _g thttps://github.com/mako2x<CR>
 no _f tfacebook.com<CR>
 no _c tgoogle.com/calendar<CR>
 no _m thttp://jp.admob.com/my_sites<CR>
 no _r thttp://cloud.feedly.com/#latest<CR>
 
 " Others
+no _p :winopen -private<CR>
 no _a :anc<CR>
-no _p :set invprivate<CR>
+no A :account 
 no <S-y> :copy title<CR>
 no <C-Down> :set toolbars=navigation,menu<CR>
 no <C-Up> :set toolbars=nonavigation,nomenu<CR>
@@ -124,6 +126,25 @@ EOM
 
 
 "+----------------------------------------------------------------------------------------+
+" Plugin Manager
+"+----------------------------------------------------------------------------------------+
+source ~/.vimperator/vimppm/vimppm/plugin/vimppm.js
+
+vimppm '_libly.js'
+vimppm 'multi_requester.js'
+vimppm 'copy.js'
+vimppm 'migemo-find.js'
+vimppm 'appendAnchor.js'
+vimppm 'feedSomeKeys_3.js'
+vimppm 'walk-input.js'
+vimppm 'account_switcher.js'
+vimppm 'buffer-multiple-hints.js'
+vimppm 'pluginManager.js'
+vimppm 'autoproxychanger.js'
+vimppm 'slideshare.js'
+
+
+"+----------------------------------------------------------------------------------------+
 " Hatena Bookmark
 "+----------------------------------------------------------------------------------------+
 " https://github.com/hatena/hatena-bookmark-xul/wiki/Vimperator-%E3%81%A7%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%8B%A1%E5%BC%B5%E3%82%92%E4%BD%BF%E3%81%86
@@ -147,22 +168,37 @@ javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://h
 " feedSomeKeys_3
 "+----------------------------------------------------------------------------------------+
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-command! -nargs=+ lazyfmapgooglereader  lazy fmap  -urls='http://www\.google\.(co\.jp|com)/reader' <args>
-command! -nargs=+ lazyfmapsgooglereader lazy fmaps -urls='http://www\.google\.(co\.jp|com)/reader' <args>
-command! -nargs=+ lazyfmapsgoogle lazy fmaps -urls='http://www\.google\.(co\.jp|com)/search\?' <args>
-
-" Google Reader
-lazyfmapsgooglereader -events=vkeypress A r v O gh ga gs gt gu / ?
-lazyfmapsgooglereader -events=vkeypress i,j o,k f,s a,ga w,A
-lazyfmapsgooglereader -events=vkeypress <C-1>,1 <C-2>,2
-
-" Google
-lazyfmapsgoogle -events=vkeypress <Up> <Down>
 
 " Twitter
-command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-lazy fmaps -urls='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
+lazy fmaps -u='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
 
+" Feedly
+lazy fmaps -u='^http://feedly\.com/' i,j o,k gs,gl ga v s r <CR>
+
+" Facebook
+lazy fmaps -u='^https://www.facebook\.com/' -events=vkeydown j k <CR>
+
+" Gmail
+lazy fmaps -u='^https://mail\.google\.com/' j k r z c s gi / # ! ?
+
+
+"+----------------------------------------------------------------------------------------+
+" Slideshare.js
+"+----------------------------------------------------------------------------------------+
+nnoremap -urls=www\\.slideshare\\.net j :slideshare next<CR>
+nnoremap -urls=www\\.slideshare\\.net k :slideshare prev<CR>
+nnoremap -urls=www\\.slideshare\\.net f :slideshare fullscreen<CR>
+
+
+"+----------------------------------------------------------------------------------------+
+" Account Switcher
+"+----------------------------------------------------------------------------------------+
+js <<EOS
+liberator.globalVariables.accountSwitcherLoginServices = [
+  'makox@hatena',
+  'mako2x@twitter',
+];
+EOS
 
 
 "+----------------------------------------------------------------------------------------+
@@ -260,3 +296,4 @@ hi Object             color: khaki;
 hi Function           color: skyblue;
 hi URL                color: lightgreen;
 hi TabNumber          color: white; font-size: 10pt; font-weight: bold; 
+

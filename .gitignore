@@ -2,3 +2,6 @@
 .vim/bundle/*
 !.vim/bundle/neobundle.vim
 .vim/.netrwhist
+.vimperator/info
+.vimperator/vimppm/*
+!.vimperator/vimppm/vimppm

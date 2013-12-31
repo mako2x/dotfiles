@@ -5,10 +5,11 @@ export TERM=screen-256color
 export EDITOR=vim
 
 # Path
-PATH=$PATH:$HOME/bin
-PATH=$PATH:/sbin
-PATH=$PATH:/usr/sbin
-PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:/sbin
+export PATH=$PATH:/usr/sbin
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/sbin
 
 # rbenv
 if [ -d $HOME/.rbenv ]; then
