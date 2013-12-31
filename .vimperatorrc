@@ -170,16 +170,22 @@ javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://h
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 
 " Twitter
-lazy fmaps -u='^https://twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
+lazy fmaps -u='twitter\.com/' -events=vkeydown n gh gr gp gf gm gl gs ga gu j k ? . <CR>
 
 " Feedly
-lazy fmaps -u='^http://feedly\.com/' i,j o,k gs,gl ga v s r <CR>
+lazy fmaps -u='feedly\.com/' i,j o,k gs,gl ga n p v s r <CR>
 
 " Facebook
-lazy fmaps -u='^https://www.facebook\.com/' -events=vkeydown j k <CR>
+lazy fmaps -u='facebook\.com/' -events=vkeydown j k <CR>
 
 " Gmail
-lazy fmaps -u='^https://mail\.google\.com/' j k r z c s gi / # ! ?
+lazy fmaps -u='mail\.google\.com/' j k r z c s gi / # ! ?
+
+" Confluence
+lazy fmaps -u='confluence\.' e gd gs gr g/,/ [ ?
+
+" JIRA
+lazy fmaps -u='jira\.' j k n p gd ?
 
 
 "+----------------------------------------------------------------------------------------+

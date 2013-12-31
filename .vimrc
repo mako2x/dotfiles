@@ -87,6 +87,8 @@ NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'LeafCage/yankround.vim'
+NeoBundle 'kien/ctrlp.vim'
 
 " Tags
 NeoBundle 'majutsushi/tagbar'
@@ -103,6 +105,7 @@ NeoBundle 'thinca/vim-textobj-plugins'
 NeoBundle 'wombat256.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'osyo-manga/vim-anzu'
+NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'kien/rainbow_parentheses.vim'
 
 " HTML & CSS
@@ -381,10 +384,9 @@ command! -nargs=* Eunix set ff=unix
 command! -nargs=* Edos set ff=dos
 command! -nargs=* Emac set ff=mac
 
-" NeoBundle Install
-command! -nargs=* Install NeoBundleInstall
-
 " Alias
+command! -nargs=* Reload so $MYVIMRC
+command! -nargs=* Install so $MYVIMRC | NeoBundleInstall
 command! -nargs=0 Wq wq
 command! -nargs=0 Ws !sudo tee % > /dev/null
 command! -nargs=0 Finder !open .
@@ -553,7 +555,7 @@ let g:lightline = {
 \ }
 
 """"""""""""""""""""""""""""""
-" Vim anzu
+" Vim Anzu
 """"""""""""""""""""""""""""""
 nmap n <Plug>(anzu-n)
 nmap N <Plug>(anzu-N)
@@ -563,6 +565,22 @@ augroup vim-anzu
   autocmd!
   autocmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
 augroup END
+
+""""""""""""""""""""""""""""""
+" Vim Over
+""""""""""""""""""""""""""""""
+nmap <Leader>s :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+vmap <Leader>s y:OverCommandLine<CR>%s/<C-v>//g<Left><Left>
+
+""""""""""""""""""""""""""""""
+" Yankround
+""""""""""""""""""""""""""""""
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+let g:yankround_max_history = 50
+nnoremap <Leader><C-p> :<C-u>CtrlPYankRound<CR>
 
 """"""""""""""""""""""""""""""
 " Memolist
