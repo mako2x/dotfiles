@@ -5,10 +5,11 @@ update
 upgrade
 
 # Add Repository
-tap homebrew/versions || true
-tap phinze/homebrew-cask || true
-tap homebrew/binary || true
-tap mako2x/homebrew-mycask || true
+tap homebrew/versions
+tap phinze/homebrew-cask
+tap homebrew/binary
+tap thoughtbot/formulae
+tap mako2x/homebrew-mycask
 
 # Packages
 install brew-cask
@@ -17,6 +18,7 @@ install git
 install gist
 install tig
 install git-flow
+install gitsh
 install jq
 install coreutils
 install rmtrash
@@ -34,6 +36,8 @@ install readline
 install openssl
 install optipng
 install md5sha1sum
+install phantomjs
+install casperjs
 
 # .dmg
 cask install iterm2

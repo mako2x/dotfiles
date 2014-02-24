@@ -10,18 +10,6 @@ endif
 
 "let g:neobundle_default_git_protocol = 'https'
 
-NeoBundleLazy 'Shougo/unite.vim', {
-  \ 'autoload': { 'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'] } }
-
-NeoBundleLazy 'ujihisa/unite-rake', {
-  \ 'depends': 'Shougo/unite.vim' }
-
-NeoBundleLazy 'Shougo/unite-outline', {
-  \ 'autoload': { 'unite_sources': 'outline' } }
-
-NeoBundleLazy 'tsukkee/unite-tag', {
-  \ 'autoload': { 'unite_sources': 'tag' } }
-
 NeoBundleLazy 'Shougo/neocomplete.vim', {
     \ "autoload": {"insert": 1}}
 let s:hooks = neobundle#get_hooks("neocomplete.vim")
@@ -59,32 +47,50 @@ NeoBundleLazy 'Shougo/vimfiler', {
   \   'commands': ['VimFiler', 'VimFilerExplorer', 'Edit', 'Write', 'Read', 'Source']
   \ }}
 
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
+" Unite
+NeoBundleLazy 'Shougo/unite.vim', {
+  \ 'autoload': { 'commands': ['Unite', 'UniteWithBufferDir', 'UniteWithCursorWord'] } }
+
+NeoBundleLazy 'ujihisa/unite-rake', {
+  \ 'depends': 'Shougo/unite.vim' }
+
+NeoBundleLazy 'Shougo/unite-outline', {
+  \ 'autoload': { 'unite_sources': 'outline' } }
+
+NeoBundleLazy 'tsukkee/unite-tag', {
+  \ 'autoload': { 'unite_sources': 'tag' } }
+
+NeoBundleLazy 'rhysd/unite-codic.vim', {
+  \ 'autoload': { 'unite_sources': 'codic' } }
+NeoBundle 'koron/codic-vim'
+
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/webapi-vim'
-NeoBundle 'thinca/vim-template'
 NeoBundleLazy 'mattn/gist-vim', {
   \ 'depends': 'mattn/webapi-vim',
   \ 'autoload': { 'commands': 'Gist' } }
+NeoBundle 'L9'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ujihisa/repl.vim'
+
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundleLazy 'kana/vim-smartinput', {
+  \ 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'kana/vim-operator-user'
 NeoBundleLazy 'kana/vim-operator-replace', {
   \ 'depends':  'vim-operator-user', 
   \ 'autoload': {
   \   'mappings': [['nx', '<Plug>(operator-replace)']]
   \ }}
-NeoBundleLazy 'kana/vim-smartinput', {
-  \ 'autoload': { 'insert': 1 } }
+NeoBundle 'thinca/vim-template'
 
-NeoBundle 'L9'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'ujihisa/repl.vim'
-NeoBundle 'tomtom/tcomment_vim'
+" Move
+NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'LeafCage/yankround.vim'
@@ -107,10 +113,11 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'scrooloose/syntastic'
 
 " HTML & CSS
 NeoBundleLazy 'mattn/emmet-vim', {
-  \ 'autoload': { 'filetypes': ['html', 'erb'] } }
+  \ 'autoload': { 'filetypes': ['html', 'erb', 'php'] } }
 NeoBundleLazy 'othree/html5.vim', {
   \ 'autoload': { 'filetypes': 'html' } }
 NeoBundleLazy 'slim-template/vim-slim', {
@@ -429,6 +436,8 @@ nmap <silent> <Space>uo :Unite outline<CR>
 " Tags
 nmap <silent> <Space>tt :<C-u>UniteWithCursorWord -immediately tag<CR>
 nmap <silent> <Space>ta :<C-u>Unite tag<CR>
+" Codic
+nmap <silent> <Space>uc :<C-u>Unite codic<CR>
 
 
 """"""""""""""""""""""""""""""
@@ -595,7 +604,6 @@ map <Space>jl :MemoList<CR>
 " Jekyll
 """"""""""""""""""""""""""""""
 let g:jekyll_path = "$HOME/Dropbox/work/blog/src"
-
 
 """"""""""""""""""""""""""""""
 " Slim

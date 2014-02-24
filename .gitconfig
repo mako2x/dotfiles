@@ -3,28 +3,43 @@
 [color]
 	ui        = auto
 [alias]
-	a         = add -A
-	ad        = add -A
+  # add
+	a         = !git add -A && git status
+	ad        = !git add -A && git status
+	acm       = !git add -A && git commit -m
 
+  # commit
 	c         = commit
 	cm        = commit -m
-	cma       = commit --amend
 	cminit    = commit -m 'Initial commit'
+	ca        = commit --amend
+  this      = !git init && git add . && git commit -m \"Initial commit\"
 
+  # status
 	s         = status
-	st        = status
 	sh        = show
+  sho       = remote show origin
 
+  # checkout
 	co        = checkout
 	com       = checkout master
-  m         = checkout master
 	cod       = checkout develop
+	cop       = checkout -
 	cb        = checkout -b
+  cbf       = !sh -c 'git checkout -b feature-$0'
+  cbr       = !sh -c 'git checkout -b release-$0'
+  cbh       = !sh -c 'git checkout -b hotfix-$0'
 
+  # branch
 	b         = branch
 	ba        = branch -a
 	br        = branch -r
+  bd        = branch -d
+  bD        = branch -D
+  bdd       = !sh -c 'git branch -d $0 && git push origin :$0'
+  bDd       = !sh -c 'git branch -D $0 && git push origin :$0'
 
+  # diff
 	d         = diff
 	dc        = diff --cached
 	ds        = diff --staged
@@ -37,6 +52,7 @@
 	d4        = diff HEAD~~~~
 	d5        = diff HEAD~~~~~
 
+  # git-flow
 	f         = flow
 	finit     = flow init
 	ffs       = flow feature start
@@ -46,14 +62,25 @@
 	fhs       = flow hotfix start
 	fhf       = flow hotfix finish
 
+  # log
 	l         = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	ll        = log --stat --abbrev-commit
-  t         = !tig
 
+  # push
 	p         = push
 	po        = push origin
 	pom       = push origin master
+	pod       = push origin develop
+	pot       = push origin --tags
+  poc       = !git push origin `git rev-parse --abbrev-ref HEAD`
 
+  # pull
+	pl        = pull
+	plo       = pull origin
+	plom      = pull origin master
+	plod      = pull origin develop
+
+  # remote
   r         = remote
   rv        = remote -v
   ra        = remote add
@@ -61,10 +88,21 @@
 	raogh     = !git remote add origin https://github.com/mako2x/$1.git
 	raobb     = !git remote add origin ssh://git@bitbucket.org/mako2x/$1.git
 
-	cl        = clone
+	re        = reset
+	reh       = reset --hard
+	rehh      = reset --hard HEAD
+	res       = reset --soft
 
-  # Make this a git repo
-  this      = !git init && git add . && git commit -m \"Initial commit\"
+  # tag
+  t         = tag
+  ta        = tag -a
+
+  # merge
+  m         = merge --no-ff --log
+  mp        = merge --no-ff --log -
+
+  # clone
+	cl        = clone
 
   # Show all defined aliases
   alias     = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/' | sort
@@ -83,8 +121,6 @@
   #      $ git ignoreio list
   ignoreio  = !"f() { local s=$1; shift; while [ $# -gt 0 ]; do s="$s,$1"; shift; done; curl "http://gitignore.io/api/$s"; }; f"
 
-  rmbranch = !sh -c 'git branch -d $0 && git push origin :$0'
-
 [core]
 	editor         = vim -c \"set fenc=utf-8\"
 	pager          = lv -c
@@ -94,6 +130,11 @@
 	lineNumber = true
 [merge]
 	ff = false
+[merge "mergepbx"]
+  name = XCode project files merger
+  driver = mergepbx %O %A %B
+[push]
+	default = simple
 [pager]
   log  = diff-highlight | less
   show = diff-highlight | less
