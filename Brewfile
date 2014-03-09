@@ -56,6 +56,8 @@ cask install sourcetree
 cask install kindle
 cask install slate
 cask install genymotion
+cask install alfred
+cask install dash
 
 # Remove outdated versions
 cleanup

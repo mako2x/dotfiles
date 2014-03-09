@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.atastypixel.headersearch</string>
+	<key>connections</key>
+	<dict>
+		<key>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>54AEBF98-3543-4895-9C6E-D27DB3BFAD14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Michael Tyson</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Search Xcode Header Files</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>36</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>require_once("workflows.php");
+$wf = new Workflows();
+
+exec("find /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/*/System/Library/Frameworks -name '*.h' -and -not -path '*Simulator*' -exec grep -nH '".str_replace("'", "'\\''", "{query}")."' {} \;", $results);
+
+foreach ( $results as $result ) {
+	preg_match("/^(.*?:[0-9]+):(.*)/", $result, $matches);
+	$wf-&gt;result("header-".md5($matches[1]), $matches[1], trim($matches[2]), basename($matches[1]), 'icon.png');
+}
+
+echo $wf-&gt;toxml();</string>
+				<key>title</key>
+				<string>Search Xcode header files</string>
+				<key>type</key>
+				<integer>1</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>63</integer>
+				<key>script</key>
+				<string>/usr/local/bin/subl {query}</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>54AEBF98-3543-4895-9C6E-D27DB3BFAD14</string>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>54AEBF98-3543-4895-9C6E-D27DB3BFAD14</key>
+		<dict>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>7DD3BDE5-A157-42E5-9376-F681FB50A4EE</key>
+		<dict>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://atastypixel.com/blog</string>
+</dict>
+</plist>
