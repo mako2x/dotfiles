@@ -163,6 +163,9 @@ NeoBundle 'kannokanno/previm'
 NeoBundleLazy 'joker1007/vim-markdown-quote-syntax', {
   \ 'autoload': { 'filetypes': 'markdown' } }
 
+" Other
+NeoBundle 'airblade/vim-rooter'
+
 filetype plugin indent on
 
 
@@ -207,6 +210,7 @@ set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 set ambiwidth=double
 set wildmenu
+set ambiwidth=double
 if has('mouse')
   set mouse=a
 endif
@@ -299,7 +303,6 @@ augroup vimrcEx
     \ endif
 augroup END
 
-
 " Zenkaku Space
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
@@ -312,6 +315,15 @@ if has('syntax')
   augroup END
 endif
 
+" Checking typo
+autocmd BufWriteCmd :*,*[,*] call s:write_check_typo(expand('<afile>'))
+function! s:write_check_typo(file)
+  let prompt = "possible typo: really want to write to '" . a:file . "'?(y/n):"
+  let input = input(prompt)
+  if input =~? '^y\(es\)\=$'
+    execute 'write'.(v:cmdbang ? '!' : '') a:file
+  endif
+endfunction
 
 
 "========================================
