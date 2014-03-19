@@ -16,7 +16,7 @@
   this      = !git init && git add . && git commit -m \"Initial commit\"
 
   # status
-	s         = status
+	s         = !git status && git stash list
 	sh        = show
   sho       = remote show origin
 

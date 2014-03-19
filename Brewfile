@@ -17,7 +17,6 @@ install zsh
 install git
 install gist
 install tig
-install git-flow
 install gitsh
 install jq
 install coreutils
@@ -25,12 +24,12 @@ install rmtrash
 install wget
 install lv
 install tmux
+install reattach-to-user-namespace
 install tree
 install nkf
 install imagemagick
 install packer
 install uncrustify
-install p7zip
 install apple-gcc42
 install readline
 install openssl
@@ -38,6 +37,12 @@ install optipng
 install md5sha1sum
 install phantomjs
 install casperjs
+install mysql
+install tomcat
+install rbenv
+install maven
+install android-sdk
+install ant
 
 # .dmg
 cask install iterm2
@@ -47,17 +52,23 @@ cask install thunderbird
 cask install google-chrome
 cask install virtualbox
 cask install vagrant
-cask install dropbox
 cask install keyremap4macbook
+cask install pckeyboardhack
+cask install sourcetree
+cask install slate
+cask install alfred
+cask install spectacle
+cask install genymotion
+cask install eclipse-ide
+cask install android-studio
+cask install google-japanese-ime
+cask install iphone-configuration-utility
+cask install dash
 cask install line
 cask install skype
 cask install gyazo
-cask install sourcetree
+cask install dropbox
 cask install kindle
-cask install slate
-cask install genymotion
-cask install alfred
-cask install dash
 
 # Remove outdated versions
 cleanup
