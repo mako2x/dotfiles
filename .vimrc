@@ -62,6 +62,9 @@ NeoBundleLazy 'tsukkee/unite-tag', {
 
 NeoBundleLazy 'rhysd/unite-codic.vim', {
   \ 'autoload': { 'unite_sources': 'codic' } }
+NeoBundleLazy 'yuku-t/unite-git', {
+  \ 'autoload': { 'unite_sources': 'git_cached' } }
+
 NeoBundle 'koron/codic-vim'
 
 NeoBundle 'tyru/open-browser.vim'
@@ -181,8 +184,6 @@ elseif isdirectory($VIM . '\vimfiles')
   let $MY_VIMRUNTIME = $VIM.'\vimfiles'
 endif
 
-
-
 "========================================
 " Script Encoding
 "========================================
@@ -199,6 +200,7 @@ set nowritebackup
 set nobackup
 set noswapfile
 set directory=~/.vim/vimbackup
+set undodir=~/.vim/undo
 set clipboard=unnamed
 set nrformats-=octal
 set timeoutlen=3500
@@ -370,7 +372,7 @@ nmap <Space>s :<C-u>setl spell!<CR>
 
 
 "========================================
-" Indert Mode
+" Insert Mode
 "========================================
 
 
@@ -436,6 +438,15 @@ let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_bookmark_directory = $HOME . '/.unite/bookmark'
 let g:unite_source_history_yank_enable = 1
+
+" Use ag (The Silver Searcher)
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_max_candidates = 200
+endif
+
 " Buffer
 nmap <silent> <Space>ub :<C-u>Unite buffer<CR>
 " File
@@ -452,6 +463,11 @@ nmap <silent> <Space>tt :<C-u>UniteWithCursorWord -immediately tag<CR>
 nmap <silent> <Space>ta :<C-u>Unite tag<CR>
 " Codic
 nmap <silent> <Space>uc :<C-u>Unite codic<CR>
+" Git
+nmap <silent> <Space>ug :<C-u>Unite git_cached<CR>
+" Grep
+nmap <silent> <Space>up :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nmap <silent> <Space>uP :<C-u>UniteResume search-buffer<CR>
 
 
 """"""""""""""""""""""""""""""
@@ -487,6 +503,7 @@ vmap ib <Plug>(textobj-multiblock-i)
 """"""""""""""""""""""""""""""
 let g:syntastic_javascript_chacker = 'jshint'
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['php'] }
+let g:syntastic_go_checkers = ['go', 'golint']
 
 """"""""""""""""""""""""""""""
 " JS Complete
@@ -628,3 +645,18 @@ augroup slim
 augroup END
 
 nmap ! :Switch<CR>
+
+""""""""""""""""""""""""""""""
+" golang
+""""""""""""""""""""""""""""""
+inoremap <Nul> <C-x><C-o>
+set completeopt-=preview
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+endif
+auto BufWritePre *.go Fmt
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.go = '[^.[:digit:] *\t]\.\w*'

@@ -28,6 +28,8 @@ setopt hist_ignore_space
 setopt inc_append_history
 setopt share_history
 setopt no_flow_control
+bindkey "^[p" history-beginning-search-backward
+bindkey "^[n" history-beginning-search-forward
 
 
 ###################################

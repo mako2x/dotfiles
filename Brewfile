@@ -6,8 +6,8 @@ upgrade
 
 # Add Repository
 tap homebrew/versions
-tap phinze/homebrew-cask
 tap homebrew/binary
+tap caskroom/homebrew-cask
 tap thoughtbot/formulae
 tap mako2x/homebrew-mycask
 
@@ -17,7 +17,6 @@ install zsh
 install git
 install gist
 install tig
-install gitsh
 install jq
 install coreutils
 install rmtrash
@@ -28,21 +27,18 @@ install reattach-to-user-namespace
 install tree
 install nkf
 install imagemagick
-install packer
 install uncrustify
 install apple-gcc42
 install readline
 install openssl
-install optipng
-install md5sha1sum
 install phantomjs
 install casperjs
-install mysql
-install tomcat
 install rbenv
 install maven
 install android-sdk
-install ant
+install go
+install the_silver_searcher
+install direnv
 
 # .dmg
 cask install iterm2

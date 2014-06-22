@@ -1,7 +1,9 @@
 alias ls='ls -GF'
 alias la='ls -AFG'
 alias ll='ls -FGals'
+alias cpr='cp -r'
 alias rmt='rmtrash'
+alias rmr='rm -r'
 alias mk='mkdir'
 alias ...='cd ../../ && pwd'
 alias ....='cd ../../../ && pwd'
@@ -80,6 +82,7 @@ alias bib='bundle install --binstubs --shebang ruby-local-exec --path vendor/bun
 alias br='bundle exec rake'
 alias brd='bundle exec rake device'
 alias brs="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES"
+alias brs6="bundle exec rake args='-AppleLanguages \"(ja)\"' NSZombieEnabled=YES target=6.1"
 alias brsp='bundle exec rake spec'
 alias pa='bundle exec padrino'
 alias pas='bundle exec padrino start'

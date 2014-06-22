@@ -29,6 +29,12 @@ if [ -d $HOME/.phpenv ]; then
   eval "$(phpenv init -)"
 fi
 
+# golang
+if [ -x "`which go`" ]; then
+  export GOROOT=`go env GOROOT`
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
 
 # android-sdk
 export ANDROID_HOME=$HOME/android-sdk
