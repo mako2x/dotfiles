@@ -32,7 +32,7 @@ fi
 # golang
 if [ -x "`which go`" ]; then
   export GOROOT=`go env GOROOT`
-  export GOPATH=$HOME/go
+  export GOPATH=$HOME
   export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 fi
 
@@ -40,6 +40,18 @@ fi
 export ANDROID_HOME=$HOME/android-sdk
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 export PATH=$ANDROID_HOME:$PATH
+
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT=/Users/mako/cocos2d-x/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable NDK_ROOT for cocos2d-x
+export NDK_ROOT=/Users/mako/android-ndk
+export PATH=$NDK_ROOT:$PATH
+
+# Add environment variable ANT_ROOT for cocos2d-x
+export ANT_ROOT=/usr/local/bin
+export PATH=$ANT_ROOT:$PATH
 
 # bundle exec
 export PATH=./bin:$PATH

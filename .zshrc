@@ -1,7 +1,6 @@
 ###################################
 # Vim mode
 ###################################
-bindkey -v
 bindkey "^P" up-line-or-history
 bindkey "^N" down-line-or-history
 bindkey "^R" history-incremental-search-backward
@@ -163,3 +162,4 @@ function chpwd(){
 [ -f ~/.zshrc.alias ]    && source ~/.zshrc.alias
 [ -f ~/.zshrc.function ] && source ~/.zshrc.function
 [ -f ~/.zshrc.plugin ]   && source ~/.zshrc.plugin
+[ -f ~/.zshrc.peco ]     && source ~/.zshrc.peco

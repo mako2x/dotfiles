@@ -115,5 +115,5 @@ alias vgsd='vagrant snapshot delete'
 ## Shortcut
 alias cdd='cd ~/Dropbox/'
 alias cddd='cd ~/Dropbox/doc/'
-alias cdw='cd ~/Dropbox/work/'
 alias cdk='cd ~/Desktop/'
+alias cds='cd ~/src/'

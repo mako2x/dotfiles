@@ -128,8 +128,6 @@
 	attributesfile = ~/.gitattributes_global
 [grep]
 	lineNumber = true
-[merge]
-	ff = false
 [merge "mergepbx"]
   name = XCode project files merger
   driver = mergepbx %O %A %B
@@ -145,3 +143,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[ghq]
+  root = ~/src

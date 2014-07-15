@@ -9,6 +9,7 @@ tap homebrew/versions
 tap homebrew/binary
 tap caskroom/homebrew-cask
 tap thoughtbot/formulae
+tap peco/peco
 tap mako2x/homebrew-mycask
 
 # Packages
@@ -34,11 +35,13 @@ install openssl
 install phantomjs
 install casperjs
 install rbenv
+install nodebrew
 install maven
 install android-sdk
 install go
 install the_silver_searcher
 install direnv
+install peco
 
 # .dmg
 cask install iterm2
@@ -49,7 +52,7 @@ cask install google-chrome
 cask install virtualbox
 cask install vagrant
 cask install keyremap4macbook
-cask install pckeyboardhack
+cask install seil
 cask install sourcetree
 cask install slate
 cask install alfred
@@ -65,6 +68,7 @@ cask install skype
 cask install gyazo
 cask install dropbox
 cask install kindle
+cask install sequel-pro
 
 # Remove outdated versions
 cleanup
